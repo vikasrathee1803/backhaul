@@ -56,6 +56,10 @@ Every gap-filling assumption made during the build, logged per Hard Rule 8. Each
     Assuming the decision drawer (agent reasoning, confidence, cost, override button) fits in a 380px right panel.
     → Impact if wrong: widen to 480px or use a full-screen modal.
 
+18. **Accent hue is the lineaiq cyan-blue (`oklch(0.74 0.13 225)`), not the portfolio cobalt (#1D3FE3).**
+    The brief named two design sources. On a dark operator canvas a luminous cyan reads as a clear action/live signal, where a saturated cobalt fights the dark background. The portfolio's *discipline* (minimal radius, no shadows on flat surfaces, restraint) is honored; its specific palette is not. All disposition/node/confidence/cost tokens derive from this accent + the semantic palette.
+    → Impact if wrong: re-hue `--accent` (one token; OKLch lightness/contrast unaffected since only H changes) and the `--disposition-replace`/`--mp-shopify` derivations; ~1 hour.
+
 ## Scope
 
 12. **A single seeded admin user is sufficient for the v1 demo.**
@@ -73,6 +77,16 @@ Every gap-filling assumption made during the build, logged per Hard Rule 8. Each
 15. **Under $0.10 per full graph run is achievable.**
     Assuming claude-haiku-4-5 for the cheaper agents and claude-sonnet-4-6 for the Decision Agent keeps per-run cost under $0.10. claude-opus-4-7 is only evaluated for Decision Agent comparison.
     → Impact if wrong: redesign prompt sizes and model assignments.
+
+## Schema (Phase 1C)
+
+19. **Migration run-order may deviate from the brief's stated order for FK integrity.**
+    The brief lists `customers → orders → order_lines → sku_catalog → …` and `… → decisions → …` before `prompt_versions`. `001_initial_schema.sql` moves `sku_catalog` before `orders`/`order_lines` (they FK it) and `prompt_versions` before `decisions` (it FKs it). The set of objects is identical; only ordering changed.
+    → Impact if wrong: none — ordering is internal to a single transactional migration; the brief's logical grouping is preserved in `docs/01d-schema.md`.
+
+20. **`eval_results.expected_disposition` is denormalized so `passed` can be a same-row STORED generated column.**
+    Postgres `STORED GENERATED` columns may reference only same-row columns, but the brief defines `passed` against `eval_cases.expected_disposition`. The expected disposition is copied onto `eval_results` at insert (from the joined `eval_cases` row) so `passed = (actual_disposition = expected_disposition)` is valid PG.
+    → Impact if wrong: low — the copy is write-once at insert; if eval-case expectations are ever edited after results exist, historical `passed` reflects the expectation at scoring time (arguably correct for an audit record).
 
 ## Observability
 

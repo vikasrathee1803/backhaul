@@ -1,0 +1,866 @@
+/* =============================================================================
+   Backhaul — globals.css
+   Single source of truth for all design tokens, primitives, and animations.
+   Operator-grade, dense, dark-default. OKLch color system. Geist + Geist Mono.
+   See docs/01c-design-system.md for the full rationale.
+   ========================================================================== */
+
+/* -----------------------------------------------------------------------------
+   1. RESET
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* -----------------------------------------------------------------------------
+   2. ROOT VARIABLES — dark theme (default)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Backgrounds — 5-level OKLch elevation ramp */
+  --bg-0: oklch(0.140 0.005 260);   /* page canvas, graph canvas */
+  --bg-1: oklch(0.180 0.005 260);   /* sidebar, cards, node fill */
+  --bg-2: oklch(0.225 0.006 260);   /* hover, inputs, running node */
+  --bg-3: oklch(0.275 0.007 260);   /* active / pressed, selected row */
+  --bg-4: oklch(0.325 0.008 260);   /* separator surface, popover bg */
+
+  /* Borders */
+  --border-0: oklch(0.275 0.007 260);
+  --border-1: oklch(0.340 0.008 260);
+  --border-2: oklch(0.450 0.009 260);
+
+  /* Text */
+  --text-0: oklch(0.97 0.005 260);  /* primary */
+  --text-1: oklch(0.78 0.006 260);  /* secondary */
+  --text-2: oklch(0.58 0.006 260);  /* muted */
+  --text-3: oklch(0.42 0.005 260);  /* placeholder / disabled */
+
+  /* Semantic */
+  --accent: oklch(0.74 0.13 225);                /* cyan-blue */
+  --accent-soft: oklch(0.74 0.13 225 / 0.14);
+  --accent-glow: oklch(0.74 0.13 225 / 0.28);
+  --accent-fg: oklch(0.18 0.04 240);
+  --success: oklch(0.74 0.13 160);               /* green */
+  --warn: oklch(0.80 0.14 78);                   /* amber */
+  --danger: oklch(0.68 0.16 22);                 /* red */
+  --ai: oklch(0.72 0.16 305);                    /* purple-magenta */
+
+  /* Disposition colors */
+  --disposition-refund: oklch(0.74 0.13 160);    /* green */
+  --disposition-replace: oklch(0.74 0.13 225);   /* cyan-blue (accent) */
+  --disposition-repair: oklch(0.80 0.14 78);     /* amber */
+  --disposition-refurb: oklch(0.72 0.16 305);    /* purple (ai) */
+  --disposition-donate: oklch(0.60 0.04 260);    /* muted blue-gray */
+  --disposition-dispose: oklch(0.50 0.02 260);   /* darker gray */
+  --disposition-escalate: oklch(0.68 0.16 22);   /* red */
+
+  /* Node state colors (Agent Ops) */
+  --node-idle: var(--bg-1);
+  --node-idle-border: var(--border-0);
+  --node-running: var(--bg-2);
+  --node-running-border: var(--accent);
+  --node-running-glow: var(--accent-glow);
+  --node-complete: var(--bg-1);
+  --node-complete-border: var(--success);
+  --node-failed: var(--bg-1);
+  --node-failed-border: var(--danger);
+  --node-escalated: var(--bg-1);
+  --node-escalated-border: var(--warn);
+
+  /* Marketplace badge colors */
+  --mp-wayfair: oklch(0.65 0.18 250);    /* Wayfair purple */
+  --mp-amazon: oklch(0.80 0.14 78);      /* Amazon orange */
+  --mp-houzz: oklch(0.68 0.16 22);       /* Houzz red */
+  --mp-overstock: oklch(0.72 0.14 165);  /* Overstock green */
+  --mp-shopify: oklch(0.74 0.13 160);    /* Shopify green */
+
+  /* Confidence meter */
+  --confidence-high: var(--success);
+  --confidence-mid: var(--warn);
+  --confidence-low: var(--danger);
+
+  /* Cost meter (thresholds: ok < $0.02, warn < $0.05, danger >= $0.05) */
+  --cost-ok: var(--success);
+  --cost-warn: var(--warn);
+  --cost-danger: var(--danger);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.4);
+  --shadow-2: 0 8px 24px oklch(0 0 0 / 0.4);
+  --shadow-pop: 0 16px 48px oklch(0 0 0 / 0.6);
+
+  /* Density */
+  --density: 1;
+  --row-h: calc(28px * var(--density));
+
+  /* Motion */
+  --ease-panel: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur-struct: 220ms;
+  --dur-page: 320ms;
+  --dur-node: 150ms;
+
+  /* Fonts (next/font injects the actual family vars; these are fallbacks) */
+  --font-sans: var(--font-geist-sans), Geist, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+/* -----------------------------------------------------------------------------
+   3. LIGHT THEME OVERRIDES (v2 — mechanism only; default & demo are dark)
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --bg-0: oklch(0.985 0.003 260);
+  --bg-1: oklch(0.965 0.004 260);
+  --bg-2: oklch(0.935 0.005 260);
+  --bg-3: oklch(0.900 0.006 260);
+  --bg-4: oklch(0.860 0.007 260);
+
+  --border-0: oklch(0.900 0.006 260);
+  --border-1: oklch(0.840 0.007 260);
+  --border-2: oklch(0.740 0.008 260);
+
+  --text-0: oklch(0.220 0.010 260);
+  --text-1: oklch(0.380 0.009 260);
+  --text-2: oklch(0.520 0.008 260);
+  --text-3: oklch(0.640 0.007 260);
+
+  color-scheme: light;
+}
+
+/* -----------------------------------------------------------------------------
+   4. BASE — html / body
+   -------------------------------------------------------------------------- */
+html,
+body {
+  background: var(--bg-0);
+  color: var(--text-0);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-0);
+}
+
+/* -----------------------------------------------------------------------------
+   5. LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.gap-8 { gap: 32px; }
+
+.divider-v {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-0);
+}
+
+.divider-h {
+  height: 1px;
+  width: 100%;
+  background: var(--border-0);
+}
+
+/* -----------------------------------------------------------------------------
+   6. TEXT UTILITIES
+   -------------------------------------------------------------------------- */
+.text-0 { color: var(--text-0); }
+.text-1 { color: var(--text-1); }
+.text-2 { color: var(--text-2); }
+.text-3 { color: var(--text-3); }
+.text-accent { color: var(--accent); }
+.text-ai { color: var(--ai); }
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Font-size scale */
+.fs-11 { font-size: 11px; }
+.fs-12 { font-size: 12px; }
+.fs-13 { font-size: 13px; }
+.fs-14 { font-size: 14px; }
+.fs-16 { font-size: 16px; }
+.fs-18 { font-size: 18px; }
+.fs-22 { font-size: 22px; }
+.fs-28 { font-size: 28px; letter-spacing: -0.02em; }
+
+/* Font-weight scale */
+.w-500 { font-weight: 500; }
+.w-600 { font-weight: 600; }
+.w-700 { font-weight: 700; }
+
+/* Uppercase label convention */
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* -----------------------------------------------------------------------------
+   7. CARD
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--bg-1);
+  border: 1px solid var(--border-0);
+  border-radius: var(--radius-lg);
+}
+
+.card.clickable {
+  cursor: pointer;
+  transition: border-color 120ms ease-out;
+}
+
+.card.clickable:hover {
+  border-color: var(--border-1);
+}
+
+/* -----------------------------------------------------------------------------
+   8. BUTTONS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-sm);
+  color: var(--text-0);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 120ms ease-out, border-color 120ms ease-out;
+}
+
+.btn:hover {
+  background: var(--bg-3);
+}
+
+.btn:active {
+  background: var(--bg-3);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-sm {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  height: 36px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-1);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-2);
+  color: var(--text-0);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-fg);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: oklch(0.68 0.16 22 / 0.12);
+}
+
+/* -----------------------------------------------------------------------------
+   9. BADGE
+   -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-0);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-1);
+  white-space: nowrap;
+}
+
+/* Disposition badge variants */
+.badge.disp-refund    { color: var(--disposition-refund);    border-color: var(--disposition-refund);    background: oklch(0.74 0.13 160 / 0.14); }
+.badge.disp-replace   { color: var(--disposition-replace);   border-color: var(--disposition-replace);   background: oklch(0.74 0.13 225 / 0.14); }
+.badge.disp-repair    { color: var(--disposition-repair);    border-color: var(--disposition-repair);    background: oklch(0.80 0.14 78 / 0.14); }
+.badge.disp-refurb    { color: var(--disposition-refurb);    border-color: var(--disposition-refurb);    background: oklch(0.72 0.16 305 / 0.14); }
+.badge.disp-donate    { color: var(--disposition-donate);    border-color: var(--disposition-donate);    background: oklch(0.60 0.04 260 / 0.18); }
+.badge.disp-dispose   { color: var(--disposition-dispose);   border-color: var(--disposition-dispose);   background: oklch(0.50 0.02 260 / 0.20); }
+.badge.disp-escalate  { color: var(--disposition-escalate);  border-color: var(--disposition-escalate);  background: oklch(0.68 0.16 22 / 0.14); }
+
+/* Marketplace badge variants */
+.badge.mp-wayfair   { color: var(--mp-wayfair);   border-color: var(--mp-wayfair);   background: oklch(0.65 0.18 250 / 0.14); }
+.badge.mp-amazon    { color: var(--mp-amazon);    border-color: var(--mp-amazon);    background: oklch(0.80 0.14 78 / 0.14); }
+.badge.mp-houzz     { color: var(--mp-houzz);     border-color: var(--mp-houzz);     background: oklch(0.68 0.16 22 / 0.14); }
+.badge.mp-overstock { color: var(--mp-overstock); border-color: var(--mp-overstock); background: oklch(0.72 0.14 165 / 0.14); }
+.badge.mp-shopify   { color: var(--mp-shopify);   border-color: var(--mp-shopify);   background: oklch(0.74 0.13 160 / 0.14); }
+
+/* -----------------------------------------------------------------------------
+   10. PILL — live status indicator
+   -------------------------------------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-0);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-1);
+  white-space: nowrap;
+}
+
+.pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+.pill.success .dot { background: var(--success); }
+.pill.warn .dot    { background: var(--warn); }
+.pill.danger .dot  { background: var(--danger); }
+
+/* -----------------------------------------------------------------------------
+   11. CONFIDENCE METER
+   -------------------------------------------------------------------------- */
+.confidence-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.confidence-meter .track {
+  position: relative;
+  width: 56px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--bg-3);
+  overflow: hidden;
+}
+
+.confidence-meter .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--confidence-mid);
+  transition: width 150ms ease-out;
+}
+
+.confidence-meter.high .fill { background: var(--confidence-high); }
+.confidence-meter.mid  .fill { background: var(--confidence-mid); }
+.confidence-meter.low  .fill { background: var(--confidence-low); }
+
+.confidence-meter .value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-1);
+}
+
+/* -----------------------------------------------------------------------------
+   12. COST METER
+   -------------------------------------------------------------------------- */
+.cost-meter {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  color: var(--cost-ok);
+}
+
+.cost-meter.ok     { color: var(--cost-ok); }
+.cost-meter.warn   { color: var(--cost-warn); }
+.cost-meter.danger { color: var(--cost-danger); }
+
+.cost-meter.tick {
+  animation: cost-tick 320ms ease-out;
+}
+
+/* -----------------------------------------------------------------------------
+   13. KBD
+   -------------------------------------------------------------------------- */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-1);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-1);
+}
+
+/* -----------------------------------------------------------------------------
+   14. FOCUS RING
+   -------------------------------------------------------------------------- */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+/* -----------------------------------------------------------------------------
+   15. AI TEXT / GLOW
+   -------------------------------------------------------------------------- */
+.ai-text {
+  background: linear-gradient(
+    90deg,
+    var(--ai) 0%,
+    var(--accent) 35%,
+    var(--ai) 70%,
+    var(--accent) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: ai-shimmer 2.4s linear infinite;
+}
+
+.ai-glow {
+  filter: drop-shadow(0 0 6px oklch(0.72 0.16 305 / 0.55));
+}
+
+/* -----------------------------------------------------------------------------
+   16. NODE CARD (Agent Ops)
+   -------------------------------------------------------------------------- */
+.node-card {
+  position: relative;
+  width: 220px;
+  padding: 10px 12px 10px 15px;
+  background: var(--node-idle);
+  border: 1px solid var(--node-idle-border);
+  border-radius: var(--radius);
+  transition:
+    border-color var(--dur-node) ease-out,
+    background-color var(--dur-node) ease-out,
+    box-shadow var(--dur-node) ease-out;
+}
+
+.node-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: transparent;
+}
+
+.node-card .node-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.node-card .node-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.node-card .node-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+}
+
+/* State: idle (default above) */
+
+/* State: running */
+.node-card.running {
+  background: var(--node-running);
+  border-color: var(--node-running-border);
+  box-shadow: 0 0 0 3px var(--node-running-glow);
+  animation: node-activate var(--dur-node) ease-out;
+}
+
+.node-card.running .node-name { color: var(--text-0); }
+
+.node-card.running .node-icon {
+  border-radius: 999px;
+  background: var(--accent);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+/* State: complete */
+.node-card.complete {
+  border-color: var(--node-complete-border);
+  animation: node-complete-flash 320ms ease-out;
+}
+
+.node-card.complete .node-name { color: var(--text-0); }
+.node-card.complete::before { background: var(--node-complete-border); }
+
+/* Complete-with-disposition left stripe (Decision node) */
+.node-card.complete.disp-refund::before   { background: var(--disposition-refund); }
+.node-card.complete.disp-replace::before   { background: var(--disposition-replace); }
+.node-card.complete.disp-repair::before    { background: var(--disposition-repair); }
+.node-card.complete.disp-refurb::before    { background: var(--disposition-refurb); }
+.node-card.complete.disp-donate::before    { background: var(--disposition-donate); }
+.node-card.complete.disp-dispose::before   { background: var(--disposition-dispose); }
+.node-card.complete.disp-escalate::before  { background: var(--disposition-escalate); }
+
+/* State: failed */
+.node-card.failed {
+  border-color: var(--node-failed-border);
+  animation: node-failed-flash 320ms ease-out;
+}
+
+.node-card.failed::before { background: var(--node-failed-border); }
+.node-card.failed .node-name { color: var(--text-0); }
+
+/* State: escalated (HITL) */
+.node-card.escalated {
+  border-color: var(--node-escalated-border);
+}
+
+.node-card.escalated::before { background: var(--node-escalated-border); }
+.node-card.escalated .node-name { color: var(--warn); }
+
+/* -----------------------------------------------------------------------------
+   17. GRAPH EDGES (Agent Ops — @xyflow/react path styling)
+   -------------------------------------------------------------------------- */
+.bh-edge {
+  stroke: var(--border-1);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  opacity: 0.3;
+  fill: none;
+}
+
+.bh-edge.active {
+  stroke: var(--accent);
+  opacity: 1;
+  animation: edge-fire 600ms ease-out, dash-flow 0.9s linear infinite;
+}
+
+.bh-edge.complete {
+  stroke: var(--success);
+  opacity: 0.4;
+  animation: none;
+}
+
+/* -----------------------------------------------------------------------------
+   18. DETAIL PANEL / DECISION DRAWER
+   -------------------------------------------------------------------------- */
+.detail-panel {
+  position: fixed;
+  top: 36px;
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  background: var(--bg-1);
+  border-left: 1px solid var(--border-0);
+  box-shadow: var(--shadow-2);
+  z-index: 40;
+  animation: panel-slide-in var(--dur-struct) var(--ease-panel);
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----------------------------------------------------------------------------
+   19. SCROLLBAR (.scroll — opt-in)
+   -------------------------------------------------------------------------- */
+.scroll {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-2) transparent;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: var(--border-1);
+  border: 2px solid var(--bg-0);
+  border-radius: 999px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--border-2);
+}
+
+.scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   20. TABLE ROW
+   -------------------------------------------------------------------------- */
+.row-item {
+  display: flex;
+  align-items: center;
+  height: var(--row-h);
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border-0);
+  transition: background-color 90ms ease-out;
+}
+
+.row-item:hover {
+  background: var(--bg-2);
+}
+
+.row-item.selected {
+  background: var(--bg-3);
+}
+
+.row-item.clickable {
+  cursor: pointer;
+}
+
+/* -----------------------------------------------------------------------------
+   21. SKELETON (loading)
+   -------------------------------------------------------------------------- */
+.skeleton {
+  background: var(--bg-2);
+  border-radius: var(--radius-sm);
+  animation: scan-pulse 1.4s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------------------------
+   22. ENTRANCE
+   -------------------------------------------------------------------------- */
+.fade-up {
+  animation: fade-up var(--dur-page) var(--ease-panel) both;
+}
+
+/* =============================================================================
+   23. KEYFRAMES
+   ========================================================================== */
+
+/* Animated SVG graph edge — steady flow march */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -18; }
+}
+@keyframes flow-dash {
+  to { stroke-dashoffset: -18; }
+}
+
+/* Live indicator dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.78); }
+}
+
+/* Page entrance */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Right detail panel slide in */
+@keyframes panel-slide-in {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* AI loading shimmer (gradient sweep across clipped text) */
+@keyframes ai-shimmer {
+  from { background-position: 0% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* Skeleton pulse */
+@keyframes scan-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
+/* Agent Ops node going idle -> running */
+@keyframes node-activate {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0   var(--node-running-glow); }
+  55%  { transform: scale(1.03); box-shadow: 0 0 0 5px var(--node-running-glow); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 3px var(--node-running-glow); }
+}
+
+/* Node completing — flash to success then settle */
+@keyframes node-complete-flash {
+  0%   { background: oklch(0.74 0.13 160 / 0.22); border-color: var(--success); }
+  60%  { background: oklch(0.74 0.13 160 / 0.10); }
+  100% { background: var(--node-complete); border-color: var(--node-complete-border); }
+}
+
+/* Node failing — flash to danger then settle */
+@keyframes node-failed-flash {
+  0%   { background: oklch(0.68 0.16 22 / 0.22); border-color: var(--danger); }
+  60%  { background: oklch(0.68 0.16 22 / 0.10); }
+  100% { background: var(--node-failed); border-color: var(--node-failed-border); }
+}
+
+/* Edge fires when control flow passes through — burst then settle to dashed */
+@keyframes edge-fire {
+  0%   { stroke-width: 3;   opacity: 1;   filter: drop-shadow(0 0 4px var(--accent-glow)); }
+  35%  { stroke-width: 2.5; opacity: 1;   filter: drop-shadow(0 0 6px var(--accent-glow)); }
+  100% { stroke-width: 1.5; opacity: 1;   filter: none; }
+}
+
+/* Cost meter increments — brief yellow flash */
+@keyframes cost-tick {
+  0%   { color: var(--warn); transform: scale(1.06); }
+  100% { color: inherit;     transform: scale(1); }
+}
+
+/* =============================================================================
+   24. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Hold looping liveness animations in a static state */
+  .pill .dot,
+  .node-card.running .node-icon,
+  .ai-text,
+  .bh-edge.active {
+    animation: none !important;
+  }
+}

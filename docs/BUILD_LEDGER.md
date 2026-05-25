@@ -2,7 +2,7 @@
 
 Single source of truth for build status across all phases. Maintained from Phase 0 onward per Hard Rule 3. Every feature touched gets a row; out-of-scope edits get logged here per Hard Rule 9.
 
-**Last updated:** 2026-05-25
+**Last updated:** 2026-05-25 (Phase 1B design system built)
 
 ## Status Definitions
 
@@ -37,43 +37,49 @@ Single source of truth for build status across all phases. Maintained from Phase
 
 | Feature | Status | Phase | Spec Link | Tests | Known Gaps |
 | --- | --- | --- | --- | --- | --- |
-| Architecture doc | planned | 1A | `/docs/01a-architecture.md` | — | Python vs TS agent runtime to be confirmed |
-| Graph topology doc | planned | 1A | `/docs/01b-graph-topology.md` | — | Must cover all 15 agents as nodes |
-| LangGraph graph topology file | planned | 1A | — | — | One file, declares every node/edge/conditional |
-| WebSocket/SSE protocol spec | planned | 1A | `/docs/01a-architecture.md` | — | SSE leaning per ASSUMPTIONS #2 |
-| Braintrust wiring spec | planned | 1A | `/docs/01a-architecture.md` | — | Span-per-node contract |
-| Env var schema | planned | 1A | `/docs/01a-architecture.md` | — | Covers both runtimes |
-| CI scaffold (`.github/workflows`) | planned | 1A | `/docs/01a-architecture.md` | — | Eval-gated, both runtimes |
+| Architecture doc | built | 1A | `/docs/01a-architecture.md` | — | Runtime split resolved: two-runtime (Python FastAPI + TS BFF) |
+| Graph topology doc | built | 1A | `/docs/01b-graph-topology.md` | — | Authoritative; covers all 15 agents as nodes |
+| LangGraph graph topology file | planned | 1A | `/docs/01b-graph-topology.md` | — | Spec done; `topology.py` implementation is Phase 2B |
+| WebSocket/SSE protocol spec | built | 1A | `/docs/01a-architecture.md` §1.3, §2; `/docs/01b-graph-topology.md` §6 | — | SSE confirmed per ASSUMPTIONS #2; persisted replay fallback |
+| Braintrust wiring spec | built | 1A | `/docs/01a-architecture.md` §1.6; `/docs/01b-graph-topology.md` §3 | — | Span-per-node contract `backhaul.{agent}` |
+| Env var schema | built | 1A | `/docs/01a-architecture.md` §3; `.env.example`, `apps/agent/.env.example` | — | Covers both runtimes |
+| CI scaffold (`.github/workflows`) | built | 1A | `.github/workflows/ci.yml`; `/docs/01a-architecture.md` §6 | — | Eval-gated, both runtimes, Braintrust job on main |
 
 ## Phase 1B — Design System
 
 | Feature | Status | Phase | Spec Link | Tests | Known Gaps |
 | --- | --- | --- | --- | --- | --- |
-| Design system doc | planned | 1B | `/docs/01c-design-system.md` | — | Operator-grade, dense, dark default |
-| `globals.css` with full token system | planned | 1B | `/docs/01c-design-system.md` | — | OKLch tokens |
-| Component primitive library | planned | 1B | `/docs/01c-design-system.md` | — | — |
-| Agent Ops node state designs (idle/running/complete/failed/escalated) | planned | 1B | `/docs/01c-design-system.md` | — | Must match topology node set |
-| Keyboard navigation spec | planned | 1B | `/docs/01c-design-system.md` | — | Keyboard-first interaction model |
+| Design system doc | built | 1B | `/docs/01c-design-system.md` | — | Operator-grade, dense, dark default; accent stays lineaiq cyan (not portfolio cobalt) |
+| `globals.css` with full token system | built | 1B | `/docs/01c-design-system.md` | — | OKLch tokens; at `apps/web/app/globals.css`; light theme is mechanism-only (v2) |
+| Component primitive library | built | 1B | `/docs/01c-design-system.md` | — | card, btn variants, badge (+disposition/marketplace), pill, confidence/cost meter, node-card, detail-panel, kbd |
+| Agent Ops node state designs (idle/running/complete/failed/escalated) | built | 1B | `/docs/01c-design-system.md` | — | All 5 states + node-activate/complete-flash/failed-flash/edge-fire keyframes; matches 15-node topology |
+| Keyboard navigation spec | built | 1B | `/docs/01c-design-system.md` | — | Global R/E/O/?, arrow nav, graph +/-/0; suppressed in text inputs |
 
 ## Phase 1C — Schema
 
 | Feature | Status | Phase | Spec Link | Tests | Known Gaps |
 | --- | --- | --- | --- | --- | --- |
-| Schema doc | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `orders` table | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `order_lines` table | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `customers` table | planned | 1C | `/docs/01d-schema.md` | — | LTV + prior return rate fields |
-| `returns` table | planned | 1C | `/docs/01d-schema.md` | — | State machine for return status |
-| `return_lines` table | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `decisions` table | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `decision_steps` table | planned | 1C | `/docs/01d-schema.md` | — | One row per graph node visited |
-| `audit_log` table (append-only) | planned | 1C | `/docs/01d-schema.md` | — | Append-only constraint enforced |
-| `agent_runs` table | planned | 1C | `/docs/01d-schema.md` | — | Cost + latency per run |
-| `prompt_versions` table | planned | 1C | `/docs/01d-schema.md` | — | Mirrors `/prompts/` registry |
-| `eval_cases` table | planned | 1C | `/docs/01d-schema.md` | — | Grows from overrides |
-| `eval_results` table | planned | 1C | `/docs/01d-schema.md` | — | — |
-| `overrides` table | planned | 1C | `/docs/01d-schema.md` | — | Feeds eval dataset |
-| `sku_catalog` table | planned | 1C | `/docs/01d-schema.md` | — | Weight, freight class, refurb difficulty, stock |
+| Schema doc | built | 1C | `/docs/01d-schema.md` | — | — |
+| SQL migration `001_initial_schema.sql` | built | 1C | `supabase/migrations/001_initial_schema.sql` | — | Not yet run against a live PG (Docker engine down locally); first `psql -f` is Phase 2 |
+| `orders` table | built | 1C | `/docs/01d-schema.md §3.4` | — | — |
+| `order_lines` table | built | 1C | `/docs/01d-schema.md §3.5` | — | Cascades on order delete |
+| `customers` table | built | 1C | `/docs/01d-schema.md §3.2` | — | `return_rate` is a STORED generated column |
+| `returns` table | built | 1C | `/docs/01d-schema.md §3.6` | — | `updated_at` trigger; status state machine via CHECK |
+| `return_lines` table | built | 1C | `/docs/01d-schema.md §3.7` | — | — |
+| `decisions` table | built | 1C | `/docs/01d-schema.md §3.10` | — | Immutable: only `status` may change (trigger-enforced) |
+| `decision_steps` table | built | 1C | `/docs/01d-schema.md §3.11` | — | Append-only (trigger-enforced); one row per node visited |
+| `audit_log` table (append-only) | built | 1C | `/docs/01d-schema.md §3.12` | — | Append-only enforced by `block_mutation()` trigger |
+| `agent_runs` table | built | 1C | `/docs/01d-schema.md §3.8` | — | Cost + latency + counts per run |
+| `prompt_versions` table | built | 1C | `/docs/01d-schema.md §3.9` | — | UNIQUE (agent_name, version) |
+| `eval_cases` table | built | 1C | `/docs/01d-schema.md §3.13` | — | Grows from overrides |
+| `eval_results` table | built | 1C | `/docs/01d-schema.md §3.14` | — | `expected_disposition` denormalized so `passed` is same-row generated (ASSUMPTIONS #20) |
+| `overrides` table | built | 1C | `/docs/01d-schema.md §3.15` | — | Feeds eval dataset |
+| `sku_catalog` table | built | 1C | `/docs/01d-schema.md §3.3` | — | Weight, freight class, refurb difficulty, stock |
+| `marketplace_configs` table (channel registry) | built | 1C | `/docs/01d-schema.md §3.1` | — | Added beyond brief: registry only; policy values stay in YAML (Hard Rule 15) |
+| `escalations` table | built | 1C | `/docs/01d-schema.md §3.16` | — | Added beyond brief's named list: backs HITL queue (Escalation Agent) |
+| `comms_drafts` table | built | 1C | `/docs/01d-schema.md §3.17` | — | Added beyond brief's named list: Customer Comms drafts (queued, never sent v1) |
+| `app_meta` table (seeded admin marker) | built | 1C | `/docs/01d-schema.md §4` | — | Added beyond brief: single-row home for the seeded admin user (single-tenant v1) |
+| Append-only / immutability triggers | built | 1C | `/docs/01d-schema.md §4` | — | `block_mutation` (audit_log, decision_steps), `guard_decision_immutability` (decisions), `set_updated_at` (returns) |
 
 ## Phase 2A — Frontend Scaffold
 
