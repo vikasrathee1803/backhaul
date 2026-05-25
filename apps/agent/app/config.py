@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     sentry_dsn: str = ""
     environment: str = "development"
     skip_live_tests: bool = False
+    allowed_origins: str = ""  # comma-separated list of additional CORS origins
 
 
 settings = Settings()

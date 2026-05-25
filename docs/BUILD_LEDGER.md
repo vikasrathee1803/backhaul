@@ -2,7 +2,7 @@
 
 Single source of truth for build status across all phases. Maintained from Phase 0 onward per Hard Rule 3. Every feature touched gets a row; out-of-scope edits get logged here per Hard Rule 9.
 
-**Last updated:** 2026-05-25 (Phase 4 agent ops view polish complete — tsc clean)
+**Last updated:** 2026-05-25 (Phase 5 deploy & portfolio packaging complete)
 
 ## Status Definitions
 
@@ -157,15 +157,18 @@ Each agent row covers spec doc, versioned prompt, implementation, and evals per 
 
 | Feature | Status | Phase | Spec Link | Tests | Known Gaps |
 | --- | --- | --- | --- | --- | --- |
-| Vercel deploy (Next.js) | planned | 5 | `/docs/05-deploy.md` | — | — |
-| Render/Railway deploy (agent service) | planned | 5 | `/docs/05-deploy.md` | — | Free tier |
-| Neon Postgres provisioned | planned | 5 | `/docs/05-deploy.md` | — | — |
-| Upstash Redis provisioned | planned | 5 | `/docs/05-deploy.md` | — | — |
-| Braintrust account configured | planned | 5 | `/docs/05-deploy.md` | — | Free tier |
-| Sentry configured | planned | 5 | `/docs/05-deploy.md` | — | Free tier |
-| Smoke test on prod | planned | 5 | `/docs/05-deploy.md` | — | Full demo flow end to end |
-| README (90-sec pitch + demo gif + architecture) | planned | 5 | `/README.md` | — | — |
-| Architecture portfolio artifact | planned | 5 | `/docs/ARCHITECTURE.md` | — | Decision log included |
+| Vercel config (`vercel.json`) | built | 5 | `/apps/web/vercel.json` | — | Awaiting live Vercel project creation |
+| Render config (`render.yaml` + `Dockerfile`) | built | 5 | `/apps/agent/render.yaml` | — | Awaiting live Render service creation |
+| Neon Postgres | planned | 5 | `/docs/05-deploy.md §1a` | — | Runbook written; awaiting account provisioning |
+| Upstash Redis | planned | 5 | `/docs/05-deploy.md §1b` | — | Runbook written; awaiting account provisioning |
+| Braintrust configured | planned | 5 | `/docs/05-deploy.md §1c` | — | Span hooks built in Phase 3; awaiting API key |
+| Sentry configured | planned | 5 | `/docs/05-deploy.md §1d` | — | SDK wired in Phase 2; awaiting DSN |
+| CORS update for prod URL | built | 5 | `/apps/agent/app/main.py` | `ruff check` | `ALLOWED_ORIGINS` env var; hardcoded vercel.app origin |
+| CI fix: dev deps install | built | 5 | `/.github/workflows/ci.yml` | — | `requirements-dev.txt` now installed in agent + eval jobs |
+| Smoke test checklist | built | 5 | `/docs/05-deploy.md §5` | — | 12-checkbox runbook; requires live prod deploy to execute |
+| README (90-sec pitch) | built | 5 | `/README.md` | — | Demo gif/Loom link pending live deploy |
+| Architecture portfolio artifact | built | 5 | `/docs/ARCHITECTURE.md` | — | 9-section decision log; complete |
+| Deploy runbook | built | 5 | `/docs/05-deploy.md` | — | Step-by-step for Vercel + Render + Neon + Upstash |
 
 ## Deferred — Non-Goals for V1
 

@@ -74,7 +74,7 @@ jobs:
           cache-dependency-path: apps/agent/requirements.txt
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Type check
         run: mypy .
@@ -99,6 +99,7 @@ jobs:
         working-directory: apps/agent
     env:
       BRAINTRUST_API_KEY: ${{ secrets.BRAINTRUST_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -111,7 +112,7 @@ jobs:
           cache-dependency-path: apps/agent/requirements.txt
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Run Braintrust eval suite
         run: pytest evals/
