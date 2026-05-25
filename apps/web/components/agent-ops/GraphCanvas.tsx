@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useMemo, useEffect } from "react";
 import * as XYFlow from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import dagre from "dagre";
@@ -118,28 +118,59 @@ export function GraphCanvas({
   totalCostUsd = 0,
   evalAccuracy = 0.94,
 }: GraphCanvasProps) {
-  const rawNodes: Node[] = graphNodes.map((n) => ({
-    id: n.id,
-    type: "agentNode",
-    position: { x: 0, y: 0 },
-    data: n,
-  }));
+  // Compute layout ONCE (stable topology — same nodes every time)
+  const { initialNodes, initialEdges } = useMemo(() => {
+    const rawNodes: Node[] = graphNodes.map((n) => ({
+      id: n.id,
+      type: "agentNode",
+      position: { x: 0, y: 0 },
+      data: n,
+    }));
+    const rawEdges: Edge[] = graphEdges.map((e) => ({
+      id: e.id,
+      source: e.source,
+      target: e.target,
+      animated: e.active,
+      style: {
+        stroke: e.active ? "var(--accent)" : "var(--border-1)",
+        strokeWidth: 1.5,
+      },
+    }));
+    const { nodes, edges } = layoutGraph(rawNodes, rawEdges);
+    return { initialNodes: nodes, initialEdges: edges };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // intentionally run once — layout is stable
 
-  const rawEdges: Edge[] = graphEdges.map((e) => ({
-    id: e.id,
-    source: e.source,
-    target: e.target,
-    animated: e.active,
-    style: {
-      stroke: e.active ? "var(--accent)" : "var(--border-1)",
-      strokeWidth: 1.5,
-    },
-  }));
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const { nodes: layoutedNodes, edges: layoutedEdges } = layoutGraph(rawNodes, rawEdges);
+  // Sync node data (states) from props on every change
+  useEffect(() => {
+    setNodes((prev) =>
+      prev.map((rfNode) => {
+        const fresh = graphNodes.find((gn) => gn.id === rfNode.id);
+        return fresh ? { ...rfNode, data: fresh } : rfNode;
+      })
+    );
+  }, [graphNodes, setNodes]);
 
-  const [nodes, , onNodesChange] = useNodesState(layoutedNodes);
-  const [edges, , onEdgesChange] = useEdgesState(layoutedEdges);
+  // Sync edge animated state
+  useEffect(() => {
+    setEdges((prev) =>
+      prev.map((rfEdge) => {
+        const fresh = graphEdges.find((ge) => ge.id === rfEdge.id);
+        if (!fresh) return rfEdge;
+        return {
+          ...rfEdge,
+          animated: fresh.active,
+          style: {
+            stroke: fresh.active ? "var(--accent)" : "var(--border-1)",
+            strokeWidth: 1.5,
+          },
+        };
+      })
+    );
+  }, [graphEdges, setEdges]);
 
   const handleNodeClick: NodeMouseHandler = useCallback(
     (_evt, node) => {

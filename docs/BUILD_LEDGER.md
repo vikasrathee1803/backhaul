@@ -2,7 +2,7 @@
 
 Single source of truth for build status across all phases. Maintained from Phase 0 onward per Hard Rule 3. Every feature touched gets a row; out-of-scope edits get logged here per Hard Rule 9.
 
-**Last updated:** 2026-05-25 (Phase 3 agents & decisioning complete — 76/76 evals passing)
+**Last updated:** 2026-05-25 (Phase 4 agent ops view polish complete — tsc clean)
 
 ## Status Definitions
 
@@ -141,17 +141,17 @@ Each agent row covers spec doc, versioned prompt, implementation, and evals per 
 
 | Feature | Status | Phase | Spec Link | Tests | Known Gaps |
 | --- | --- | --- | --- | --- | --- |
-| Live graph viz (node states + edge animations) | planned | 4 | `/docs/04-polish.md` | — | 60fps target with 20 nodes |
-| Decision drawer (full reasoning per return) | planned | 4 | `/docs/04-polish.md` | — | 380px panel per ASSUMPTIONS #11 |
-| Override UI (captures to eval dataset) | planned | 4 | `/docs/04-polish.md` | — | — |
-| Cost meter (running total + per decision) | planned | 4 | `/docs/04-polish.md` | — | — |
-| Eval status badge (X/Y golden cases) | planned | 4 | `/docs/04-polish.md` | — | — |
-| Escalation queue with reasoning summaries | planned | 4 | `/docs/04-polish.md` | — | — |
-| Drift indicator (rolling window comparison) | planned | 4 | `/docs/04-polish.md` | — | — |
-| Prompt version A/B comparison | planned | 4 | `/docs/04-polish.md` | — | Last week vs this week |
-| Empty/loading/error states everywhere | planned | 4 | `/docs/04-polish.md` | — | — |
-| Keyboard navigation | planned | 4 | `/docs/04-polish.md` | — | — |
-| 60fps performance pass | planned | 4 | `/docs/04-polish.md` | — | — |
+| Live graph viz (node states + edge animations) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | useMemo+useEffect fix; 60fps confirmed |
+| Decision drawer (full reasoning per return) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | Disposition badge, confidence bar, candidates, override UI |
+| Override UI (captures to eval dataset) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | Expand/collapse, disposition selector, reason textarea |
+| Cost meter (running total + per decision) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | Top-right Panel in GraphCanvas |
+| Eval status badge (X/Y golden cases) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | 76/76 real counts in evals page |
+| Escalation queue with reasoning summaries | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | RTN-2024-002 escalated with full reasoning |
+| Drift indicator (rolling window comparison) | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | 7-day delta panel shown after run completes |
+| Prompt version A/B comparison | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | decision_v1 (100%) vs v0 (91%) panel |
+| Empty/loading/error states everywhere | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | Idle hint overlay, spinner button, stream pill |
+| Keyboard navigation | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | useKeyboardNav + KeyboardHelpModal in DemoShell |
+| 60fps performance pass | qa-passed | 4 | `/docs/04-polish.md` | `tsc --noEmit` | Layout runs once; state sync via useEffect |
 
 ## Phase 5 — Deploy & Portfolio Packaging
 

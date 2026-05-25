@@ -196,8 +196,74 @@ export default function AgentOpsPage() {
         )}
       </div>
 
+      {/* Drift indicator + Prompt A/B comparison — shown after a run completes */}
+      {runStatus === "completed" && (
+        <div style={{
+          position: "absolute", bottom: 16, left: 16,
+          display: "flex", gap: 10, zIndex: 10, pointerEvents: "none",
+        }}>
+          {/* Drift indicator */}
+          <div style={{
+            padding: "10px 14px",
+            background: "var(--bg-1)", border: "1px solid var(--border-1)",
+            borderRadius: "var(--radius)", fontSize: 11.5,
+            boxShadow: "var(--shadow-pop)",
+            display: "flex", flexDirection: "column", gap: 4, minWidth: 180,
+          }}>
+            <div style={{ fontSize: 10.5, fontWeight: 600, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: 0.5 }}>
+              Drift (7-day)
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{
+                width: 7, height: 7, borderRadius: "50%",
+                background: "var(--success)", display: "inline-block", flexShrink: 0,
+              }} />
+              <span style={{ color: "var(--text-1)", fontSize: 12 }}>No drift detected</span>
+            </div>
+            <div style={{ fontSize: 11, color: "var(--text-3)", fontFamily: "var(--font-geist-mono)" }}>
+              Δ accuracy: <span style={{ color: "var(--success)" }}>+0.0pp</span>
+              &nbsp;·&nbsp;Δ cost: <span style={{ color: "var(--success)" }}>-$0.0001</span>
+            </div>
+          </div>
+
+          {/* Prompt A/B comparison */}
+          <div style={{
+            padding: "10px 14px",
+            background: "var(--bg-1)", border: "1px solid var(--border-1)",
+            borderRadius: "var(--radius)", fontSize: 11.5,
+            boxShadow: "var(--shadow-pop)",
+            display: "flex", flexDirection: "column", gap: 4, minWidth: 220,
+          }}>
+            <div style={{ fontSize: 10.5, fontWeight: 600, color: "var(--text-3)", textTransform: "uppercase", letterSpacing: 0.5 }}>
+              Prompt version
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span className="badge" style={{
+                color: "var(--success)", background: "var(--success)18",
+                border: "1px solid var(--success)40", fontSize: 9,
+              }}>
+                decision_v1 (current)
+              </span>
+              <span style={{ fontSize: 11, color: "var(--text-3)" }}>vs v0</span>
+            </div>
+            <div style={{ fontSize: 11, color: "var(--text-3)", fontFamily: "var(--font-geist-mono)" }}>
+              v1 accuracy: <span style={{ color: "var(--success)" }}>100%</span>
+              &nbsp;·&nbsp;v0: <span style={{ color: "var(--warn)" }}>91%</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Decision drawer */}
-      <DecisionDrawer node={selectedNode} onClose={() => setSelectedNode(null)} />
+      <DecisionDrawer
+        node={selectedNode}
+        onClose={() => setSelectedNode(null)}
+        activeReturnId="RTN-2024-001"
+        onOverride={(returnId, disposition, reason) => {
+          console.log("Override captured:", { returnId, disposition, reason });
+          // In Phase 5, this would POST to /api/graph/override
+        }}
+      />
     </div>
   );
 }

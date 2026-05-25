@@ -63,6 +63,9 @@ export type ReturnDecision = {
   cost_usd: number;
   latency_ms: number;
   model: string;
+  prompt_version: string;
+  candidate_dispositions: Array<{ disposition: string; score: number; reason: string }>;
+  escalation_reason?: string;
 };
 
 export type ReturnItem = {
@@ -80,6 +83,7 @@ export type ReturnItem = {
   status: "pending_triage" | "triaging" | "decided" | "escalated" | "resolved";
   return_requested_at: string;
   decision?: ReturnDecision;
+  escalation_reason?: string;
 };
 
 export const DEMO_RETURNS: ReturnItem[] = [
@@ -90,7 +94,7 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Corner of sofa frame broken, fabric torn on left armrest. Photos attached. Box was clearly damaged on arrival.",
     order_total_cents: 129900, inbound_freight_cost_cents: 18400, status: "decided",
     return_requested_at: "2024-11-14T09:22:00Z",
-    decision: { disposition: "refurbish", confidence: 0.87, reasoning: "Freight cost ($184) + refurb labor est. ($220) < open box resale ($899). Wayfair damage allowance covers 30% — partial reimbursement approved. Route to refurb queue.", cost_usd: 0.0082, latency_ms: 1240, model: "claude-sonnet-4-6" },
+    decision: { disposition: "refurbish", confidence: 0.87, reasoning: "Freight cost ($184) + refurb labor est. ($220) < open box resale ($899). Wayfair damage allowance covers 30% — partial reimbursement approved. Route to refurb queue.", cost_usd: 0.0082, latency_ms: 1240, model: "claude-sonnet-4-6", prompt_version: "v1", candidate_dispositions: [{ disposition: "refurbish", score: 0.87, reason: "Net refurb value exceeds 30% of order total" }, { disposition: "repair", score: 0.61, reason: "Damage is functional; repair feasible but margins tight" }, { disposition: "refund", score: 0.42, reason: "Default fallback if refurb economics unfavorable" }] },
   },
   {
     id: "RTN-2024-002", order_id: "ORD-2024-0902", customer_id: "cust-002",
@@ -99,7 +103,8 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Motor makes grinding noise after 30 minutes. Speed display intermittent. Unit runs but is not safe.",
     order_total_cents: 189900, inbound_freight_cost_cents: 32100, status: "escalated",
     return_requested_at: "2024-11-13T14:05:00Z",
-    decision: { disposition: "escalate", confidence: 0.61, reasoning: "AOV $1,899 exceeds auto-decide ceiling $1,500. Confidence 0.61 below threshold 0.75. Safety concern on fitness equipment. Recommend repair or replace — needs human review.", cost_usd: 0.0091, latency_ms: 1890, model: "claude-sonnet-4-6" },
+    decision: { disposition: "escalate", confidence: 0.61, reasoning: "AOV $1,899 exceeds auto-decide ceiling $1,500. Confidence 0.61 below threshold 0.75. Safety concern on fitness equipment. Recommend repair or replace — needs human review.", cost_usd: 0.0091, latency_ms: 1890, model: "claude-sonnet-4-6", prompt_version: "v1", candidate_dispositions: [{ disposition: "repair", score: 0.71, reason: "Motor repair est. $350 well below replacement cost" }, { disposition: "replace", score: 0.64, reason: "Safety concern justifies replacement for fitness equipment" }, { disposition: "refund", score: 0.49, reason: "Full refund if repair infeasible at this AOV" }], escalation_reason: "High-value order ($1,899) with safety concern on fitness equipment — confidence 0.61 below 0.75 threshold" },
+    escalation_reason: "High-value order ($1,899) with safety concern on fitness equipment — confidence 0.61 below 0.75 threshold",
   },
   {
     id: "RTN-2024-003", order_id: "ORD-2024-0881", customer_id: "cust-003",
@@ -108,7 +113,7 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Never used. Still in original packaging. Customer says it doesn't fit the space.",
     order_total_cents: 109900, inbound_freight_cost_cents: 12800, status: "decided",
     return_requested_at: "2024-11-15T11:30:00Z",
-    decision: { disposition: "refund", confidence: 0.92, reasoning: "Customer return rate 66.7% — fraud flag active. However item is like-new in original packaging. Wayfair policy: full refund within 30-day window. Issue refund, flag account.", cost_usd: 0.0071, latency_ms: 980, model: "claude-sonnet-4-6" },
+    decision: { disposition: "refund", confidence: 0.92, reasoning: "Customer return rate 66.7% — fraud flag active. However item is like-new in original packaging. Wayfair policy: full refund within 30-day window. Issue refund, flag account.", cost_usd: 0.0071, latency_ms: 980, model: "claude-sonnet-4-6", prompt_version: "v1", candidate_dispositions: [{ disposition: "refund", score: 0.92, reason: "Policy-compliant within 30-day window; item like-new" }, { disposition: "refurbish", score: 0.55, reason: "Item condition allows Open Box resale" }, { disposition: "escalate", score: 0.38, reason: "Fraud flag warrants manual review" }] },
   },
   {
     id: "RTN-2024-004", order_id: "ORD-2024-0867", customer_id: "cust-004",
@@ -117,7 +122,7 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Color is noticeably different from photos — appears more orange than walnut. No damage.",
     order_total_cents: 98900, inbound_freight_cost_cents: 9200, status: "decided",
     return_requested_at: "2024-11-12T16:45:00Z",
-    decision: { disposition: "replace", confidence: 0.88, reasoning: "Not-as-described on Houzz qualifies for replacement. Customer LTV $3,125 — high value. Item in good condition; re-list as Open Box. Ship replacement.", cost_usd: 0.0078, latency_ms: 1120, model: "claude-sonnet-4-6" },
+    decision: { disposition: "replace", confidence: 0.88, reasoning: "Not-as-described on Houzz qualifies for replacement. Customer LTV $3,125 — high value. Item in good condition; re-list as Open Box. Ship replacement.", cost_usd: 0.0078, latency_ms: 1120, model: "claude-sonnet-4-6", prompt_version: "v1", candidate_dispositions: [{ disposition: "replace", score: 0.88, reason: "Houzz not-as-described policy mandates replacement; high-LTV customer" }, { disposition: "refund", score: 0.62, reason: "Refund acceptable if replacement stock unavailable" }, { disposition: "refurbish", score: 0.44, reason: "Good condition item could re-list as Open Box instead" }] },
   },
   {
     id: "RTN-2024-005", order_id: "ORD-2024-0855", customer_id: "cust-005",
@@ -126,7 +131,7 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Refrigerator door hinges bent, ice maker not functioning. Compressor appears intact. Could be repaired by appliance tech.",
     order_total_cents: 219900, inbound_freight_cost_cents: 42000, status: "decided",
     return_requested_at: "2024-11-11T08:15:00Z",
-    decision: { disposition: "repair", confidence: 0.81, reasoning: "Repair est. $280 < open box resale diff $800. Amazon FBA: seller covered, freight reimbursed 80%. Schedule appliance tech pickup. Customer LTV $6,540 — send goodwill $50 credit.", cost_usd: 0.0094, latency_ms: 1560, model: "claude-sonnet-4-6" },
+    decision: { disposition: "repair", confidence: 0.81, reasoning: "Repair est. $280 < open box resale diff $800. Amazon FBA: seller covered, freight reimbursed 80%. Schedule appliance tech pickup. Customer LTV $6,540 — send goodwill $50 credit.", cost_usd: 0.0094, latency_ms: 1560, model: "claude-sonnet-4-6", prompt_version: "v1", candidate_dispositions: [{ disposition: "repair", score: 0.81, reason: "Repair economics favorable; compressor intact reduces risk" }, { disposition: "replace", score: 0.68, reason: "High-LTV customer warrants replacement consideration" }, { disposition: "refurbish", score: 0.52, reason: "Structural damage repairable; refurb viable if repair fails" }] },
   },
   {
     id: "RTN-2024-006", order_id: "ORD-2024-0843", customer_id: "cust-006",
@@ -135,7 +140,7 @@ export const DEMO_RETURNS: ReturnItem[] = [
     condition_notes: "Pedal assembly completely stripped, flywheel wobbles. Unit fell from pallet during delivery per carrier notes.",
     order_total_cents: 64900, inbound_freight_cost_cents: 8800, status: "decided",
     return_requested_at: "2024-11-15T13:22:00Z",
-    decision: { disposition: "dispose", confidence: 0.94, reasoning: "Refurb cost est. $380 exceeds open box value $449 — margin too thin. Overstock: file carrier damage claim, issue full refund. Dispose unit locally.", cost_usd: 0.0065, latency_ms: 840, model: "claude-haiku-4-5-20251001" },
+    decision: { disposition: "dispose", confidence: 0.94, reasoning: "Refurb cost est. $380 exceeds open box value $449 — margin too thin. Overstock: file carrier damage claim, issue full refund. Dispose unit locally.", cost_usd: 0.0065, latency_ms: 840, model: "claude-haiku-4-5-20251001", prompt_version: "v1", candidate_dispositions: [{ disposition: "dispose", score: 0.94, reason: "Refurb margin negative; carrier claim filed" }, { disposition: "donate", score: 0.51, reason: "Local charity pickup viable if carrier claim approved" }, { disposition: "refurbish", score: 0.22, reason: "Economics too thin — margin under 5%" }] },
   },
   {
     id: "RTN-2024-007", order_id: "ORD-2024-0831", customer_id: "cust-001",
