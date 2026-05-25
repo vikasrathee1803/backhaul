@@ -159,6 +159,14 @@ h6 {
   --dur-page: 320ms;
   --dur-node: 150ms;
 
+  /* Plan badge backgrounds */
+  --plan-pro-bg:     oklch(0.72 0.16 260 / 0.15);
+  --plan-starter-bg: oklch(0.72 0.16 145 / 0.12);
+  --plan-free-bg:    oklch(0.55 0.01 260 / 0.10);
+
+  /* Zone label */
+  --zone-label: oklch(0.55 0.01 260);
+
   /* Fonts (next/font injects the actual family vars; these are fallbacks) */
   --font-sans: var(--font-geist-sans), Geist, system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -841,6 +849,11 @@ body {
 @keyframes cost-tick {
   0%   { color: var(--warn); transform: scale(1.06); }
   100% { color: inherit;     transform: scale(1); }
+}
+
+/* Standard rotation — used by loading spinners */
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* =============================================================================

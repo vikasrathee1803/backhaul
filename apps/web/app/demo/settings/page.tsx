@@ -79,6 +79,13 @@ export default function SettingsPage() {
     setTimeout(() => setSaved(false), 2000);
   }
 
+  function handleReset() {
+    setMarketplaces(MARKETPLACES);
+    setCostCap(0.10);
+    setSelectedModel("claude-sonnet-4-6");
+    setDensity("normal");
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
       <TopBar
@@ -241,6 +248,7 @@ export default function SettingsPage() {
                 </div>
               </div>
               <button
+                onClick={handleReset}
                 style={{
                   height: 32, padding: "0 16px", flexShrink: 0,
                   background: "var(--bg-3)", border: "1px solid oklch(0.68 0.16 22 / 0.5)",

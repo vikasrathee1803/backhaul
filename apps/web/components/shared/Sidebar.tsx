@@ -25,8 +25,7 @@ const ZONES = [
     id: "operations",
     label: "OPERATIONS",
     items: [
-      { id: "dashboard",   label: "Dashboard",      icon: "home",     path: (prefix: string) => `${prefix}/dashboard` },
-      { id: "returns",     label: "Returns Queue",  icon: "queue",    path: (prefix: string) => `${prefix}/dashboard` },
+      { id: "dashboard",   label: "Returns Queue",  icon: "queue",    path: (prefix: string) => `${prefix}/dashboard` },
     ],
   },
   {

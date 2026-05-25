@@ -7,11 +7,11 @@ import { DEMO_RETURNS } from "@/app/demo/_mock/data";
 const DISPOSITION_COLOR: Record<string, string> = {
   refund: "var(--warn)",
   replace: "var(--accent)",
-  repair: "oklch(0.72 0.18 200)",
-  refurbish: "oklch(0.72 0.18 160)",
-  donate: "oklch(0.72 0.14 260)",
+  repair: "var(--disposition-repair)",
+  refurbish: "var(--disposition-refurb)",
+  donate: "var(--disposition-donate)",
   dispose: "var(--danger)",
-  escalate: "oklch(0.72 0.18 40)",
+  escalate: "var(--disposition-escalate)",
 };
 
 const DISPOSITIONS = ["refund", "replace", "repair", "refurbish", "donate", "dispose", "escalate"] as const;
