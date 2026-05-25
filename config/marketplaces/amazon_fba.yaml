@@ -1,0 +1,42 @@
+# Amazon FBA Marketplace Policy — Backhaul v1
+# Source: Amazon Seller Central FBA returns policy (fixture approximation)
+marketplace: amazon_fba
+display_name: Amazon (FBA)
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 90  # Oct 1 – Jan 31 extended holiday window
+  buyer_initiated_return: true
+  seller_pays_return_freight: false  # Amazon handles return logistics for FBA; seller pays Amazon reimbursement fees
+
+freight:
+  subsidy_type: "amazon_managed"  # Amazon manages return shipping for FBA — cost deducted from seller account
+  subsidy_pct: 100               # Amazon fully manages but charges seller indirectly via reimbursement
+  heavy_item_threshold_lbs: 150
+  heavy_item_no_return_policy: false
+  freight_allowance_pct: 0.12    # Up to 12% of order value in freight credit
+
+damage_handling:
+  damage_allowance_pct: 0.20     # Amazon's damage allowance is stricter; sellers get up to 20%
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 5000  # Amazon requires photos for claims > $50
+
+restocking:
+  restocking_fee_pct: 0.0        # Amazon FBA does not allow seller-imposed restocking fees
+  buyer_remorse_allowed: true
+
+decisioning:
+  window_days: 2                 # Amazon FBA: seller has only 2 days to respond
+  auto_decide_ceiling_cents: 150000  # Auto-decide up to $1,500
+  escalate_above_cents: 150000
+
+fraud_detection:
+  strict_mode: true              # Amazon has enhanced fraud detection for FBA
+  return_rate_flag_threshold: 0.40  # Flag customers with >40% return rate
+  concurrent_return_limit: 3    # Flag if customer has 3+ open returns simultaneously
+
+refund:
+  method: original_payment
+  processing_days: 2             # Amazon processes refunds faster: 2 business days
+  store_credit_option: false
+  amazon_handles_refund: true    # Amazon issues refund directly to buyer; reimburses seller

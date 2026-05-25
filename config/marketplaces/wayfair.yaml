@@ -1,0 +1,36 @@
+# Wayfair Marketplace Policy — Backhaul v1
+# Source: Wayfair Partner Home policy documentation (fixture approximation)
+marketplace: wayfair
+display_name: Wayfair
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 60  # Nov 1 – Jan 31
+  buyer_initiated_return: true
+  seller_pays_return_freight: false  # Wayfair absorbs for damage claims
+
+freight:
+  subsidy_type: "damage_only"  # Wayfair pays inbound freight only for damage/defect
+  subsidy_pct: 100             # Full reimbursement on damage claims
+  heavy_item_threshold_lbs: 150
+  heavy_item_no_return_policy: false  # Wayfair does still process heavy returns
+  freight_allowance_pct: 0.15  # Up to 15% of order value credited for freight
+
+damage_handling:
+  damage_allowance_pct: 0.30   # Seller can keep up to 30% of item value for damage
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 10000  # Photos required for claims > $100
+
+restocking:
+  restocking_fee_pct: 0.0      # Wayfair does not allow restocking fees
+  buyer_remorse_allowed: true
+
+decisioning:
+  window_days: 5               # Seller has 5 days to respond to return request
+  auto_decide_ceiling_cents: 150000  # Auto-decide allowed up to $1,500 order value
+  escalate_above_cents: 150000
+
+refund:
+  method: original_payment
+  processing_days: 3
+  store_credit_option: false

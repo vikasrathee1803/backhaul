@@ -1,0 +1,47 @@
+# Overstock Marketplace Policy — Backhaul v1
+# Source: Overstock (Bed Bath & Beyond marketplace) seller policy (fixture approximation)
+marketplace: overstock
+display_name: Overstock
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 45
+  buyer_initiated_return: true
+  seller_pays_return_freight: true  # Seller pays return freight (clearance channel, tight margins)
+
+freight:
+  subsidy_type: "none"              # No freight subsidy — seller bears full inbound return cost
+  subsidy_pct: 0
+  heavy_item_threshold_lbs: 100     # Lower threshold given clearance economics
+  heavy_item_no_return_policy: false
+  freight_allowance_pct: 0.0
+
+damage_handling:
+  damage_allowance_pct: 0.25
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 7500
+
+restocking:
+  restocking_fee_pct: 0.15          # 15% restocking fee allowed — clearance channel norm
+  buyer_remorse_allowed: true
+  restocking_fee_applies_to: "all_returns"
+
+decisioning:
+  window_days: 5
+  auto_decide_ceiling_cents: 80000  # Lower auto-decide ceiling ($800) — low-margin channel
+  escalate_above_cents: 80000
+
+clearance_economics:
+  typical_discount_pct: 0.40        # Items often 40% off MSRP
+  open_box_value_haircut_pct: 0.30  # Open box value is further discounted in clearance context
+  refurb_viability_threshold_pct: 0.50  # Refurb only viable if cost < 50% of clearance price
+
+fraud_detection:
+  strict_mode: false
+  return_rate_flag_threshold: 0.45
+  concurrent_return_limit: 4
+
+refund:
+  method: original_payment
+  processing_days: 5               # Slower processing on clearance channel
+  store_credit_option: false

@@ -1,0 +1,42 @@
+# Amazon FBM Marketplace Policy — Backhaul v1
+# Source: Amazon Seller Central FBM returns policy (fixture approximation)
+marketplace: amazon_fbm
+display_name: Amazon (FBM)
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 90  # Oct 1 – Jan 31
+  buyer_initiated_return: true
+  seller_pays_return_freight: true  # FBM: seller directly responsible for return freight
+
+freight:
+  subsidy_type: "seller_pays"    # FBM seller pays return freight directly
+  subsidy_pct: 0                 # No subsidy — full cost on seller
+  heavy_item_threshold_lbs: 150
+  heavy_item_no_return_policy: false
+  freight_allowance_pct: 0.0     # No freight credit from Amazon
+
+damage_handling:
+  damage_allowance_pct: 0.25
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 7500  # Photos required for claims > $75
+
+restocking:
+  restocking_fee_pct: 0.0        # Amazon does not allow restocking fees for FBM either
+  buyer_remorse_allowed: true
+
+decisioning:
+  window_days: 2                 # Strict: seller has 2 days to respond, same as FBA
+  auto_decide_ceiling_cents: 100000  # Lower auto-decide ceiling: $1,000 (FBM has more risk)
+  escalate_above_cents: 100000
+
+fraud_detection:
+  strict_mode: true
+  return_rate_flag_threshold: 0.40
+  concurrent_return_limit: 3
+
+refund:
+  method: original_payment
+  processing_days: 3
+  store_credit_option: false
+  seller_issues_refund: true     # FBM: seller must issue refund themselves

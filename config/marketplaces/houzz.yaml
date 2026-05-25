@@ -1,0 +1,50 @@
+# Houzz Marketplace Policy — Backhaul v1
+# Source: Houzz Pro seller policy documentation (fixture approximation)
+marketplace: houzz
+display_name: Houzz
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 45  # Limited holiday extension
+  buyer_initiated_return: true
+  seller_pays_return_freight: true   # Seller pays return freight unless damage claim
+
+freight:
+  subsidy_type: "damage_only"        # Freight covered only for damage/defect claims
+  subsidy_pct: 100
+  heavy_item_threshold_lbs: 150
+  heavy_item_no_return_policy: false
+  freight_allowance_pct: 0.18        # Higher freight allowance (18%) reflecting higher AOV
+
+damage_handling:
+  damage_allowance_pct: 0.35         # More lenient: up to 35% damage allowance
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 15000  # Photos required for claims > $150
+
+restocking:
+  restocking_fee_pct: 0.10           # 10% restocking fee allowed for buyer remorse
+  buyer_remorse_allowed: true
+  restocking_fee_applies_to: "buyer_remorse_only"
+
+decisioning:
+  window_days: 5
+  auto_decide_ceiling_cents: 200000  # Higher ceiling ($2,000) — Houzz customers are high-LTV
+  escalate_above_cents: 200000
+
+customer_tier:
+  designer_account_threshold_ltv: 1000000  # $10k LTV = designer tier
+  designer_tier_benefits:
+    restocking_fee_waived: true
+    priority_processing: true
+    extended_window_days: 45
+
+fraud_detection:
+  strict_mode: false               # Houzz trade customers are generally lower fraud risk
+  return_rate_flag_threshold: 0.50
+  concurrent_return_limit: 5
+
+refund:
+  method: original_payment
+  processing_days: 4
+  store_credit_option: true
+  store_credit_bonus_pct: 0.05     # 5% bonus if customer accepts store credit

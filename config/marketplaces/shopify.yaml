@@ -1,0 +1,47 @@
+# Shopify Direct D2C Marketplace Policy — Backhaul v1
+# Source: Seller-defined policy for direct D2C channel (fixture approximation)
+marketplace: shopify
+display_name: Direct (Shopify D2C)
+
+return_policy:
+  return_window_days: 30
+  extended_holiday_window_days: 60
+  buyer_initiated_return: true
+  seller_pays_return_freight: true  # Seller pays — direct relationship, best-in-class CX
+
+freight:
+  subsidy_type: "seller_pays_all"   # Seller pays all return freight as CX differentiator
+  subsidy_pct: 100                  # Full freight covered for all returns
+  heavy_item_threshold_lbs: 150
+  heavy_item_no_return_policy: false
+  freight_allowance_pct: 0.20       # Up to 20% of order value for freight
+
+damage_handling:
+  damage_allowance_pct: 0.40        # Most lenient — direct relationship
+  partial_credit_on_damage: true
+  photo_required_threshold_cents: 20000  # Only require photos for claims > $200
+
+restocking:
+  restocking_fee_pct: 0.0           # No restocking fees on direct channel
+  buyer_remorse_allowed: true
+
+decisioning:
+  window_days: 7                    # More generous: 7 days to decide
+  auto_decide_ceiling_cents: 300000  # Highest ceiling ($3,000) — trust direct customers
+  escalate_above_cents: 300000
+
+customer_relationship:
+  priority_tier: true               # Direct customers get priority handling
+  exchange_encouraged: true         # Prefer exchange over refund to retain revenue
+  loyalty_discount_on_exchange: 0.05  # 5% off replacement if customer accepts exchange
+
+fraud_detection:
+  strict_mode: false
+  return_rate_flag_threshold: 0.50
+  concurrent_return_limit: 5
+
+refund:
+  method: original_payment
+  processing_days: 1               # Fastest processing: 1 business day
+  store_credit_option: true
+  store_credit_bonus_pct: 0.10     # 10% bonus for store credit (highest in portfolio)

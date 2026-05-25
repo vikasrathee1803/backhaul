@@ -1,0 +1,1872 @@
+[
+  {
+    "id": "eval-001",
+    "source": "hand_crafted",
+    "description": "Heavy sofa, significant transit damage, refurb economics clearly favorable",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Left armrest fabric torn through to the foam, frame intact. Outer shipping box had a large impact puncture on the left side.",
+      "marketplace": "wayfair",
+      "order_total_cents": 119900,
+      "inbound_freight_cost_cents": 18400,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 196,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 12000,
+        "open_box_price_estimate_cents": 84900
+      },
+      "customer": {
+        "lifetime_value_cents": 421800,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.82,
+    "notes": "Classic refurb: freight covered by Wayfair, refurb_cost($120) + freight($0 net) = $120 << open_box($849). Easy refurb difficulty. Low return rate customer."
+  },
+  {
+    "id": "eval-002",
+    "source": "hand_crafted",
+    "description": "Like-new sectional, buyer remorse, full factory seal",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Never opened — original factory packaging completely intact, all tape seals unbroken. Customer decided to go with a different color.",
+      "marketplace": "wayfair",
+      "order_total_cents": 159900,
+      "inbound_freight_cost_cents": 22100,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 28000,
+        "open_box_price_estimate_cents": 109900
+      },
+      "customer": {
+        "lifetime_value_cents": 698200,
+        "return_rate": 0.25,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.85,
+    "notes": "Factory-sealed buyer remorse = full refund. Item can restock as new. Customer LTV high, no fraud flag. Within window."
+  },
+  {
+    "id": "eval-003",
+    "source": "hand_crafted",
+    "description": "Washer-dryer combo, drum bearing defect, 2 weeks old — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Drum makes loud banging noise during spin cycle. Machine is 2 weeks old. Interior drum intact but bearing noise audible at 1000 RPM.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 129900,
+      "inbound_freight_cost_cents": 28500,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 196,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 42000,
+        "open_box_price_estimate_cents": 89900
+      },
+      "customer": {
+        "lifetime_value_cents": 578400,
+        "return_rate": 0.143,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.78,
+    "notes": "Bearing defect on a 2-week-old appliance is clearly a warranty repair case. Repair cost (~$200) << replacement cost ($1,299). Item under warranty."
+  },
+  {
+    "id": "eval-004",
+    "source": "hand_crafted",
+    "description": "Commercial treadmill, heavily used for 1 month, belt slip and motor noise — dispose",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "Machine used for about a month in a fitness studio. Belt shows significant wear, cup holders cracked, motor grinding noise at high speed.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 289900,
+      "inbound_freight_cost_cents": 42000,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 324,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 52000,
+        "open_box_price_estimate_cents": 199900
+      },
+      "customer": {
+        "lifetime_value_cents": 312400,
+        "return_rate": 0.6,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "dispose",
+    "expected_confidence_floor": 0.75,
+    "notes": "Refurb_cost($520) + inbound_freight($420) = $940 vs open_box($1,999). Marginal but hard refurb difficulty and motor damage pushes to dispose. High return rate customer adds fraud signal."
+  },
+  {
+    "id": "eval-005",
+    "source": "hand_crafted",
+    "description": "Wrong item shipped — king bed, queen received — replace",
+    "return_snapshot": {
+      "return_reason": "wrong_item",
+      "condition": "new",
+      "condition_notes": "Ordered king size platform bed, received queen. Both boxes factory-sealed. Packing slip confirms wrong SKU shipped.",
+      "marketplace": "wayfair",
+      "order_total_cents": 89900,
+      "inbound_freight_cost_cents": 15600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 122,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 8000,
+        "open_box_price_estimate_cents": 52900
+      },
+      "customer": {
+        "lifetime_value_cents": 547600,
+        "return_rate": 0.143,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.92,
+    "notes": "Clear wrong-item case. Seller error. Replacement is always correct for wrong-item fulfillment errors. Item returned as new to inventory."
+  },
+  {
+    "id": "eval-006",
+    "source": "hand_crafted",
+    "description": "French door refrigerator, cosmetic damage on door from transit, refurb economically sound",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "fair",
+      "condition_notes": "Refrigerator right door dented on the right side — a 4-inch dent near the handle. Handle intact, cooling fully functional. Exterior cosmetic damage only.",
+      "marketplace": "houzz",
+      "order_total_cents": 239900,
+      "inbound_freight_cost_cents": 54000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 332,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 48000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 3187400,
+        "return_rate": 0.065,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.76,
+    "notes": "Door panel replacement ($280-400) is far cheaper than a full refurb cycle. Appliance tech can swap the door. Hard refurb difficulty indicates professional tech needed but it is a targeted repair not a full rebuild."
+  },
+  {
+    "id": "eval-007",
+    "source": "hand_crafted",
+    "description": "Patio dining set, used for one season, minor rust, clearance channel — dispose",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "All-season patio set used outdoors for one full season. Cushions show UV fading. Two chair leg tips have surface rust. Table surface has minor stains from use.",
+      "marketplace": "overstock",
+      "order_total_cents": 109900,
+      "inbound_freight_cost_cents": 18800,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 224,
+        "freight_class": "92.5",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 14000,
+        "open_box_price_estimate_cents": 99900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 0.667,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "dispose",
+    "expected_confidence_floor": 0.72,
+    "notes": "Overstock clearance channel: open_box haircut is 30%, so open_box_value is ~$699. Inbound_freight($188) + refurb($140) = $328 vs clearance open_box($699). Marginal. But fraud-flagged customer and wardrobing pattern tips to dispose. Overstock open_box demand also limited."
+  },
+  {
+    "id": "eval-008",
+    "source": "hand_crafted",
+    "description": "Spin bike flywheel wobble, 6 weeks old — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Flywheel wobbles noticeably at resistance levels above 8. Pedal resistance uneven. Display and frame fully intact. Only 6 weeks old.",
+      "marketplace": "shopify",
+      "order_total_cents": 129900,
+      "inbound_freight_cost_cents": 18400,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 112,
+        "freight_class": "85",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 18000,
+        "open_box_price_estimate_cents": 89900
+      },
+      "customer": {
+        "lifetime_value_cents": 578400,
+        "return_rate": 0.143,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.80,
+    "notes": "Flywheel bearing replacement is targeted repair (~$80-120). Item is only 6 weeks old, clearly a defect. Repair cost << replacement ($1,299). Direct channel — high customer value."
+  },
+  {
+    "id": "eval-009",
+    "source": "hand_crafted",
+    "description": "Outdoor sectional, assembled but never really used, like-new condition on Houzz — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Client changed the outdoor layout plan. Set assembled professionally but never used. All cushions unused in sealed bags. No wear, no stains, no scratches.",
+      "marketplace": "houzz",
+      "order_total_cents": 179900,
+      "inbound_freight_cost_cents": 21600,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 196,
+        "freight_class": "92.5",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 16000,
+        "open_box_price_estimate_cents": 119900
+      },
+      "customer": {
+        "lifetime_value_cents": 3187400,
+        "return_rate": 0.065,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.83,
+    "notes": "Like-new condition, ultra-high LTV design client on Houzz. Item can be relisted as open box but a full refund is correct given the customer relationship and the near-new condition. Freight covered on Houzz damage claims — but this is remorse, so seller pays. Still: high LTV trumps the freight cost."
+  },
+  {
+    "id": "eval-010",
+    "source": "hand_crafted",
+    "description": "Wrong item shipped (pallet jack model mismatch) — replace",
+    "return_snapshot": {
+      "return_reason": "wrong_item",
+      "condition": "new",
+      "condition_notes": "Ordered 5500 lb capacity pallet jack, received 3300 lb model. Never removed from inner packaging. Wrong model confirmed by weight rating label.",
+      "marketplace": "amazon_fbm",
+      "order_total_cents": 79900,
+      "inbound_freight_cost_cents": 16800,
+      "sku": {
+        "category": "industrial",
+        "weight_lbs": 158,
+        "freight_class": "85",
+        "refurb_difficulty": "not_refurbishable",
+        "refurb_cost_estimate_cents": 0,
+        "open_box_price_estimate_cents": 54900
+      },
+      "customer": {
+        "lifetime_value_cents": 437300,
+        "return_rate": 0.2,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 100000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.93,
+    "notes": "Clear seller fulfillment error — wrong model. Safety-critical industrial item. Replace immediately. Not refurbishable category — industrial safety compliance."
+  },
+  {
+    "id": "eval-011",
+    "source": "hand_crafted",
+    "description": "Sectional sofa, 5 months of use, multiple fabric issues — refurbish",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "Redecorating. Sectional used for 5 months — cushions show normal compression, one back cushion has a 1-inch pull in the fabric. Frame solid.",
+      "marketplace": "wayfair",
+      "order_total_cents": 159900,
+      "inbound_freight_cost_cents": 24600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 28000,
+        "open_box_price_estimate_cents": 109900
+      },
+      "customer": {
+        "lifetime_value_cents": 432100,
+        "return_rate": 0.444,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.74,
+    "notes": "Refurb_cost($280) + inbound_freight($246) = $526 vs open_box($1,099). Margin positive. Moderate refurb difficulty is manageable. High return rate warrants scrutiny but case is within policy and item is refurbishable."
+  },
+  {
+    "id": "eval-012",
+    "source": "hand_crafted",
+    "description": "Dishwasher door seal leak, 3 weeks old — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "poor",
+      "condition_notes": "Door seal leaks water onto kitchen floor with every cycle. Only 3 weeks old. Drum and electronics functional but unit unusable. Boot seal improperly seated from factory.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 69900,
+      "inbound_freight_cost_cents": 14200,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 84,
+        "freight_class": "77.5",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 22000,
+        "open_box_price_estimate_cents": 47900
+      },
+      "customer": {
+        "lifetime_value_cents": 342800,
+        "return_rate": 0.25,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.80,
+    "notes": "Boot seal replacement is a $60-90 repair, not a full unit swap. 3 weeks old — clearly warranty defect. Repair cost << replacement ($699). Standard appliance warranty repair."
+  },
+  {
+    "id": "eval-013",
+    "source": "hand_crafted",
+    "description": "Bookshelf, buyer remorse, never assembled, full refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "new",
+      "condition_notes": "Still in original packaging. Changed mind about the room design. Completely sealed.",
+      "marketplace": "wayfair",
+      "order_total_cents": 44900,
+      "inbound_freight_cost_cents": 8400,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 86,
+        "freight_class": "70",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 4500,
+        "open_box_price_estimate_cents": 29900
+      },
+      "customer": {
+        "lifetime_value_cents": 319800,
+        "return_rate": 0.2,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.87,
+    "notes": "Factory sealed = refund + restock as new. No question. Low AOV, no fraud, within window."
+  },
+  {
+    "id": "eval-014",
+    "source": "hand_crafted",
+    "description": "Gas range igniter defect, 1 month old, Houzz high-LTV client — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Left rear burner igniter does not spark. All other burners fine. Only 1 month old. Interior cosmetically perfect. Tech confirmed igniter electrode failure.",
+      "marketplace": "houzz",
+      "order_total_cents": 139900,
+      "inbound_freight_cost_cents": 28000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 168,
+        "freight_class": "85",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 35000,
+        "open_box_price_estimate_cents": 94900
+      },
+      "customer": {
+        "lifetime_value_cents": 8720000,
+        "return_rate": 0.044,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.84,
+    "notes": "Single igniter electrode replacement is a $50-80 part and 1 hour of labor. Ultra-high LTV Houzz client. Repair in place is the right answer — do not pull back a month-old unit."
+  },
+  {
+    "id": "eval-015",
+    "source": "hand_crafted",
+    "description": "TV stand, buyer remorse, assembled but unused — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Assembled but never used as a TV stand. No cables, no hardware used except assembly. Spotless finish.",
+      "marketplace": "wayfair",
+      "order_total_cents": 74900,
+      "inbound_freight_cost_cents": 14800,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 132,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 7500,
+        "open_box_price_estimate_cents": 52900
+      },
+      "customer": {
+        "lifetime_value_cents": 189400,
+        "return_rate": 0.0,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.83,
+    "notes": "Like-new assembled item. Zero return history customer. Refund + list as open box. Clean case."
+  },
+  {
+    "id": "eval-016",
+    "source": "hand_crafted",
+    "description": "Power rack, like-new, assembled once, direct channel — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Assembled once to verify fit, never loaded with weights. All hardware present and unused. Upgrading to commercial equipment.",
+      "marketplace": "shopify",
+      "order_total_cents": 179900,
+      "inbound_freight_cost_cents": 34000,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 362,
+        "freight_class": "125",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 9500,
+        "open_box_price_estimate_cents": 129900
+      },
+      "customer": {
+        "lifetime_value_cents": 876500,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.82,
+    "notes": "Direct D2C channel, like-new, all freight covered by seller policy, high-LTV customer. Refund + relist as open box."
+  },
+  {
+    "id": "eval-017",
+    "source": "hand_crafted",
+    "description": "Dining chairs wrong color on Houzz — replace",
+    "return_snapshot": {
+      "return_reason": "wrong_item",
+      "condition": "new",
+      "condition_notes": "Ordered Natural Oak finish, received Espresso finish. All 4 boxes factory sealed. Packing list confirms wrong finish shipped.",
+      "marketplace": "houzz",
+      "order_total_cents": 259600,
+      "inbound_freight_cost_cents": 12800,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 88,
+        "freight_class": "77.5",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 6000,
+        "open_box_price_estimate_cents": 44900
+      },
+      "customer": {
+        "lifetime_value_cents": 8720000,
+        "return_rate": 0.044,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.94,
+    "notes": "Clear seller error — wrong finish shipped. Ultra-high-LTV Houzz client. Replace immediately with correct finish. Returned items go back to inventory as new."
+  },
+  {
+    "id": "eval-018",
+    "source": "hand_crafted",
+    "description": "Outdoor shed, catastrophic transit moisture damage — dispose",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Pergola kit arrived with posts cracked at base, all crossbeams warped beyond use. Box was wet and compressed — apparent moisture exposure in freight. Item is effectively total loss.",
+      "marketplace": "overstock",
+      "order_total_cents": 179900,
+      "inbound_freight_cost_cents": 44000,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 412,
+        "freight_class": "125",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 11000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 0.667,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "dispose",
+    "expected_confidence_floor": 0.78,
+    "notes": "Structural wood moisture damage is not refurbishable — warped load-bearing elements cannot be safely resold. Total loss + insurance claim on carrier. Overstock open_box value also heavily discounted. Dispose."
+  },
+  {
+    "id": "eval-019",
+    "source": "hand_crafted",
+    "description": "Dresser, cosmetic transit damage — refurbish",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Three drawer faces have corner chips. One drawer runner bent and does not open smoothly. Box corners showed impact damage. Frame structurally sound.",
+      "marketplace": "wayfair",
+      "order_total_cents": 79900,
+      "inbound_freight_cost_cents": 17600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 162,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 8500,
+        "open_box_price_estimate_cents": 57900
+      },
+      "customer": {
+        "lifetime_value_cents": 342800,
+        "return_rate": 0.25,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.80,
+    "notes": "Freight covered, refurb_cost($85) + freight($0 net) = $85 << open_box($579). Easy refurb on wood furniture. Corner repairs and drawer runner replacement are standard."
+  },
+  {
+    "id": "eval-020",
+    "source": "hand_crafted",
+    "description": "Coffee table, buyer remorse, minor hairline scratch — refurbish",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Changing living room style. Coffee table used for 4 months. Marble surface has two very minor hairline scratches near the edge, not visible from standing height.",
+      "marketplace": "wayfair",
+      "order_total_cents": 84900,
+      "inbound_freight_cost_cents": 16200,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 108,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 9000,
+        "open_box_price_estimate_cents": 59900
+      },
+      "customer": {
+        "lifetime_value_cents": 432100,
+        "return_rate": 0.444,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.76,
+    "notes": "Refurb_cost($90) + inbound($162) = $252 vs open_box($599). Positive margin. High return rate on this customer but case is clean. Minor marble polish and relist."
+  },
+  {
+    "id": "eval-021",
+    "source": "hand_crafted",
+    "description": "Sectional sofa, structural frame crack from transit — dispose",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Both armrests have deep fabric tears. Left leg bent at an angle, structural impact. Frame cracked near left rear leg joint. Refurb cost likely to exceed open box value.",
+      "marketplace": "wayfair",
+      "order_total_cents": 159900,
+      "inbound_freight_cost_cents": 24200,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 28000,
+        "open_box_price_estimate_cents": 109900
+      },
+      "customer": {
+        "lifetime_value_cents": 432100,
+        "return_rate": 0.444,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "dispose",
+    "expected_confidence_floor": 0.74,
+    "notes": "Structural frame crack + bent leg = not safely refurbishable. Even with freight covered, a cracked frame is a safety issue. Dispose and claim carrier liability."
+  },
+  {
+    "id": "eval-022",
+    "source": "hand_crafted",
+    "description": "Washer door boot seal leak, 3 weeks old, Amazon FBA — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "poor",
+      "condition_notes": "Washer door seal leaks water onto the floor during every cycle. 3 weeks old. Door boot seal improperly seated from factory. Drum and motor functional.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 109900,
+      "inbound_freight_cost_cents": 26000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 218,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 38000,
+        "open_box_price_estimate_cents": 74900
+      },
+      "customer": {
+        "lifetime_value_cents": 312400,
+        "return_rate": 0.6,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.77,
+    "notes": "Door boot seal is a $45 part and 30 minutes of labor. Unit is 3 weeks old — factory defect. Even with fraud-flagged customer, the defect is real and documented. Repair in field."
+  },
+  {
+    "id": "eval-023",
+    "source": "hand_crafted",
+    "description": "Elliptical, 2 months used, fraying cables — refurbish",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "Deciding not to maintain the gym. Elliptical used for 2 months. Pedal resistance cables show some fraying on the right side. Display and motor fully functional.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 249900,
+      "inbound_freight_cost_cents": 42000,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 44000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 312400,
+        "return_rate": 0.6,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.71,
+    "notes": "Refurb_cost($440) + inbound($420) = $860 vs open_box($1,699). Positive margin. Cable replacement is standard refurb work. High return rate customer but case is within policy."
+  },
+  {
+    "id": "eval-024",
+    "source": "hand_crafted",
+    "description": "Pergola kit, transit structural damage, shopify — replace",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "3 of 8 rafters snapped at the connection points. Box showed heavy crush damage at both ends. Remaining posts and hardware undamaged. Item set not sellable in partial state.",
+      "marketplace": "shopify",
+      "order_total_cents": 249900,
+      "inbound_freight_cost_cents": 46000,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 412,
+        "freight_class": "125",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 11000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 2184000,
+        "return_rate": 0.158,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.82,
+    "notes": "Direct channel, freight covered, high-LTV customer, clear carrier fault. Replacement is correct — customer needs the item. Carrier claim filed separately."
+  },
+  {
+    "id": "eval-025",
+    "source": "hand_crafted",
+    "description": "Rowing machine, 6 weeks used, noisy chain, fair condition — refurbish",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "Decided not to keep the home gym. Rower used for about 6 weeks. Seat slide shows wear, chain mechanism is noisy but functional, monitor works.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 109900,
+      "inbound_freight_cost_cents": 18200,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 94,
+        "freight_class": "85",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 14000,
+        "open_box_price_estimate_cents": 74900
+      },
+      "customer": {
+        "lifetime_value_cents": 139900,
+        "return_rate": 0.75,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.70,
+    "notes": "Refurb_cost($140) + inbound($182) = $322 vs open_box($749). Positive margin. Fraud-flagged customer adds scrutiny but item is clearly used as described. Chain tension and slide replacement are standard."
+  },
+  {
+    "id": "eval-026",
+    "source": "hand_crafted",
+    "description": "Front-load washer, compressor DOA on arrival — escalate (high AOV, ambiguous damage)",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Refrigerator compressor not functioning on arrival — runs constantly but does not cool below 58F. No visible shipping damage. Possible refrigerant leak or compressor DOA.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 239900,
+      "inbound_freight_cost_cents": 56000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 332,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 48000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 229900,
+        "return_rate": 0.4,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.78,
+    "notes": "AOV ($2,399) exceeds auto-decide ceiling ($1,500). No visible transit damage but compressor failed — could be factory defect or refrigerant issue from transit. Requires tech inspection before decision. Escalate."
+  },
+  {
+    "id": "eval-027",
+    "source": "hand_crafted",
+    "description": "Refrigerator, fraud-flagged customer, 4th buyer remorse return — escalate",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Moving to smaller home. Refrigerator works perfectly. 5 months old. Customer has 75% return rate, this is their 4th return in 12 months, all buyer remorse on high-value items.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 239900,
+      "inbound_freight_cost_cents": 52000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 332,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 48000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 139900,
+        "return_rate": 0.75,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.82,
+    "notes": "AOV ($2,399) exceeds auto-decide ceiling ($1,500). Fraud flag + 75% return rate + pattern of high-value buyer remorse. Must escalate to human review — possible policy exploit."
+  },
+  {
+    "id": "eval-028",
+    "source": "hand_crafted",
+    "description": "Patio umbrella, buyer remorse, fraud customer on Overstock — escalate",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "fair",
+      "condition_notes": "End of season return. UV fading on fabric, tilt mechanism stiff. Customer claims defect but wear pattern consistent with seasonal use.",
+      "marketplace": "overstock",
+      "order_total_cents": 45800,
+      "inbound_freight_cost_cents": 8400,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 56,
+        "freight_class": "65",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 2500,
+        "open_box_price_estimate_cents": 22900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 0.667,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.75,
+    "notes": "Fraud flag + conflicting signals (buyer claiming defect but condition consistent with normal seasonal use = potential wardrobing). Escalate for manual review."
+  },
+  {
+    "id": "eval-029",
+    "source": "hand_crafted",
+    "description": "Elliptical, fitness studio closure, commercial use — escalate (high AOV + usage ambiguity)",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Fitness studio closing down. Machine used commercially for about 6 months — much higher usage than typical home use. Foot pedals show wear, display functional, all resistance levels operational.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 249900,
+      "inbound_freight_cost_cents": 38000,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 44000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 312400,
+        "return_rate": 0.6,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.76,
+    "notes": "AOV ($2,499) exceeds auto-decide ceiling ($1,500). Commercial use on a home-grade item is policy ambiguity. High return rate (60%) adds complexity. Escalate for human decision."
+  },
+  {
+    "id": "eval-030",
+    "source": "hand_crafted",
+    "description": "Sectional, Houzz high-LTV client, wrong colorway — escalate (AOV + multiple units)",
+    "return_snapshot": {
+      "return_reason": "wrong_item",
+      "condition": "new",
+      "condition_notes": "Ordered 2x Hartwell Sectional in Charcoal Linen. Received 2x Slate Gray. Both boxes sealed and unopened.",
+      "marketplace": "houzz",
+      "order_total_cents": 319800,
+      "inbound_freight_cost_cents": 38000,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 28000,
+        "open_box_price_estimate_cents": 109900
+      },
+      "customer": {
+        "lifetime_value_cents": 1284500,
+        "return_rate": 0.071,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.80,
+    "notes": "AOV ($3,198) exceeds Houzz auto-decide ceiling ($2,000). Wrong-item case is clear but value exceeds threshold. Escalate — but note the correct action is replace. Human should approve quickly."
+  },
+  {
+    "id": "eval-031",
+    "source": "hand_crafted",
+    "description": "Adjustable dumbbell set, wrong weight shipped — replace",
+    "return_snapshot": {
+      "return_reason": "wrong_item",
+      "condition": "new",
+      "condition_notes": "Ordered 90lb set, received 65lb set. Box sealed, never used. Weight range markings confirm incorrect SKU.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 74900,
+      "inbound_freight_cost_cents": 12400,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 108,
+        "freight_class": "65",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 4000,
+        "open_box_price_estimate_cents": 52900
+      },
+      "customer": {
+        "lifetime_value_cents": 94900,
+        "return_rate": 0.0,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.93,
+    "notes": "Clear wrong-item fulfillment error. Zero return history. Replace with correct 90lb set."
+  },
+  {
+    "id": "eval-032",
+    "source": "hand_crafted",
+    "description": "Office sit-stand desk, buyer remorse, like-new — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Decided to go back to traditional desk. Sit-stand assembled once to test the mechanism. Frame spotless, motor functional, all cables present.",
+      "marketplace": "wayfair",
+      "order_total_cents": 84900,
+      "inbound_freight_cost_cents": 14400,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 118,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 7000,
+        "open_box_price_estimate_cents": 59900
+      },
+      "customer": {
+        "lifetime_value_cents": 421800,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.84,
+    "notes": "Like-new condition, low return rate, within window. Refund and relist as open box."
+  },
+  {
+    "id": "eval-033",
+    "source": "hand_crafted",
+    "description": "Platform bed, transit headboard crack — replace",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Headboard arrived with a 14-inch crack across the top panel. Box significantly crushed on top. Crack is structural — would not be safe to assemble. Frame components undamaged.",
+      "marketplace": "wayfair",
+      "order_total_cents": 89900,
+      "inbound_freight_cost_cents": 15600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 148,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 9500,
+        "open_box_price_estimate_cents": 64900
+      },
+      "customer": {
+        "lifetime_value_cents": 432100,
+        "return_rate": 0.444,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.81,
+    "notes": "Structural crack on arrival, carrier fault documented. Freight covered by Wayfair for damage. Customer needs the item — replace is correct. High return rate noted but damage is clearly legitimate."
+  },
+  {
+    "id": "eval-034",
+    "source": "hand_crafted",
+    "description": "Commercial shelving, industrial category — buyer remorse, never used, refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "new",
+      "condition_notes": "Ordered wrong depth. Never opened — all shrink wrap intact.",
+      "marketplace": "amazon_fbm",
+      "order_total_cents": 54900,
+      "inbound_freight_cost_cents": 14200,
+      "sku": {
+        "category": "industrial",
+        "weight_lbs": 186,
+        "freight_class": "85",
+        "refurb_difficulty": "not_refurbishable",
+        "refurb_cost_estimate_cents": 0,
+        "open_box_price_estimate_cents": 34900
+      },
+      "customer": {
+        "lifetime_value_cents": 437300,
+        "return_rate": 0.2,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 100000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.86,
+    "notes": "Factory sealed, industrial item cannot be refurb'd by policy. Refund + return to inventory as new. Clean case."
+  },
+  {
+    "id": "eval-035",
+    "source": "hand_crafted",
+    "description": "Patio table glass shattered in transit, chairs intact — replace",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Tempered glass table top shattered completely. Carrier delivered without liftgate, table dropped. Base undamaged. All 6 chairs in perfect condition.",
+      "marketplace": "houzz",
+      "order_total_cents": 149900,
+      "inbound_freight_cost_cents": 0,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 224,
+        "freight_class": "92.5",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 14000,
+        "open_box_price_estimate_cents": 99900
+      },
+      "customer": {
+        "lifetime_value_cents": 8720000,
+        "return_rate": 0.044,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.87,
+    "notes": "Carrier documented fault — no liftgate used. Ultra-high-LTV Houzz design client. Freight covered. Replace table — customer needs the complete set. Carrier claim separately."
+  },
+  {
+    "id": "eval-036",
+    "source": "hand_crafted",
+    "description": "Dining table, assembler-confirmed leaf gap defect — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Two table leaves do not seat flush — 1/8 inch gap at the joint. Manufacturing defect in the breadboard ends, not assembly error. Table otherwise cosmetically perfect.",
+      "marketplace": "wayfair",
+      "order_total_cents": 119900,
+      "inbound_freight_cost_cents": 28400,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 196,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 12000,
+        "open_box_price_estimate_cents": 84900
+      },
+      "customer": {
+        "lifetime_value_cents": 421800,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.77,
+    "notes": "Breadboard end replacement or shimming is standard furniture repair — $40-80. Item is cosmetically perfect otherwise. Repair in place rather than full return."
+  },
+  {
+    "id": "eval-037",
+    "source": "hand_crafted",
+    "description": "Outdoor sectional, buyer remorse, used for 2 months, Overstock — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Sectional does not fit as expected. Used for about 2 months — cushions show minor wear, all covers clean, no structural issues.",
+      "marketplace": "overstock",
+      "order_total_cents": 119900,
+      "inbound_freight_cost_cents": 20800,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 196,
+        "freight_class": "92.5",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 16000,
+        "open_box_price_estimate_cents": 119900
+      },
+      "customer": {
+        "lifetime_value_cents": 74900,
+        "return_rate": 1.0,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.72,
+    "notes": "Within Overstock 30-day window. 15% restocking fee applies for buyer remorse. Order is under $800 auto-decide ceiling. Refund minus restocking fee is correct outcome."
+  },
+  {
+    "id": "eval-038",
+    "source": "hand_crafted",
+    "description": "Front-load washer, door seal defect 3 weeks, Amazon FBA — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "poor",
+      "condition_notes": "Door seal leaks water during every cycle. 3 weeks old. Door boot seal improperly seated from factory. Machine otherwise fully functional.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 109900,
+      "inbound_freight_cost_cents": 26000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 218,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 38000,
+        "open_box_price_estimate_cents": 74900
+      },
+      "customer": {
+        "lifetime_value_cents": 876500,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.82,
+    "notes": "Same boot seal defect — targeted repair, $45 part + 30 min labor. 3 weeks old. High-LTV customer on direct Shopify channel."
+  },
+  {
+    "id": "eval-039",
+    "source": "hand_crafted",
+    "description": "Chest freezer, defective compressor, 2 weeks old, Overstock — replace",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "poor",
+      "condition_notes": "Chest freezer does not cool below 28F — food not staying frozen. Only 2 weeks old. Compressor runs constantly. Possible refrigerant undercharge from factory. Cosmetically perfect.",
+      "marketplace": "overstock",
+      "order_total_cents": 34900,
+      "inbound_freight_cost_cents": 14400,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 96,
+        "freight_class": "85",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 18000,
+        "open_box_price_estimate_cents": 32900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 0.667,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.75,
+    "notes": "Defective appliance 2 weeks old. Even with fraud-flagged customer, the defect is real (factory refrigerant issue). Repair cost ($180) on a $349 unit is not economical — replacement is cheaper. Below $800 auto-decide ceiling."
+  },
+  {
+    "id": "eval-040",
+    "source": "hand_crafted",
+    "description": "Treadmill, belt slip and motor grinding, 6 weeks old, direct channel — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Treadmill belt slips off track at speeds above 5 mph. Grinding noise from drive motor at high speed. 6 weeks old. Belt tension adjustment did not resolve. Likely internal motor issue.",
+      "marketplace": "shopify",
+      "order_total_cents": 289900,
+      "inbound_freight_cost_cents": 48000,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 324,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 52000,
+        "open_box_price_estimate_cents": 199900
+      },
+      "customer": {
+        "lifetime_value_cents": 876500,
+        "return_rate": 0.167,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.79,
+    "notes": "Motor fault on a 6-week-old unit. Warranty repair by certified tech — motor replacement (~$300-500) is far less than replacement ($2,899). High-LTV direct channel customer."
+  },
+  {
+    "id": "eval-041",
+    "source": "hand_crafted",
+    "description": "Accent chair, buyer remorse, good condition — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Too big for the space after measuring. Used for about a week. Velvet fabric clean, no stains or tears. Some minor seat cushion flattening from use. Frame fully intact.",
+      "marketplace": "wayfair",
+      "order_total_cents": 79900,
+      "inbound_freight_cost_cents": 12600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 64,
+        "freight_class": "70",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 11000,
+        "open_box_price_estimate_cents": 54900
+      },
+      "customer": {
+        "lifetime_value_cents": 432100,
+        "return_rate": 0.444,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.74,
+    "notes": "Within window, good condition, low AOV. Refund + relist as open box. High return rate worth noting but within policy threshold."
+  },
+  {
+    "id": "eval-042",
+    "source": "hand_crafted",
+    "description": "Dining table, direct channel, 2-foot transit crack — replace",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Dining table arrived with a 2-foot crack across the table surface running through the center joint. Box corner protectors absent. Carrier inspection confirmed improper packing. Legs and apron undamaged. Surface not repairable.",
+      "marketplace": "shopify",
+      "order_total_cents": 119900,
+      "inbound_freight_cost_cents": 28000,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 196,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 12000,
+        "open_box_price_estimate_cents": 84900
+      },
+      "customer": {
+        "lifetime_value_cents": 2184000,
+        "return_rate": 0.158,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "replace",
+    "expected_confidence_floor": 0.85,
+    "notes": "Structural surface crack is not repairable. Freight covered. High-LTV direct customer. Replace immediately. Carrier claim for damages."
+  },
+  {
+    "id": "eval-043",
+    "source": "hand_crafted",
+    "description": "Washer-dryer combo, drain pump failure, 6 weeks, shopify — repair",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Combo unit stopped draining after 6 weeks. Standing water after every cycle. Error code E3 — drain pump failure. Interior clean and undamaged.",
+      "marketplace": "shopify",
+      "order_total_cents": 129900,
+      "inbound_freight_cost_cents": 28400,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 196,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 42000,
+        "open_box_price_estimate_cents": 89900
+      },
+      "customer": {
+        "lifetime_value_cents": 578400,
+        "return_rate": 0.143,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.82,
+    "notes": "Drain pump is a standard warranty repair — $75-100 part plus labor. 6 weeks old. Direct channel, freight covered. Repair in place."
+  },
+  {
+    "id": "eval-044",
+    "source": "hand_crafted",
+    "description": "Refrigerator transit damage — hinge crack, door seal failed — repair",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "poor",
+      "condition_notes": "Refrigerator door hinge cracked and door unable to seal properly. Ice maker dented. Carrier BOL notes impact event. Unit does not cool correctly due to failed door seal.",
+      "marketplace": "houzz",
+      "order_total_cents": 239900,
+      "inbound_freight_cost_cents": 54000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 332,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 48000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 3187400,
+        "return_rate": 0.065,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "repair",
+    "expected_confidence_floor": 0.77,
+    "notes": "Hinge replacement + door seal replacement (~$150-250 parts) is far less than a full refurb cycle. Freight covered. Ultra-high-LTV Houzz client — repair in place, carrier claim separately."
+  },
+  {
+    "id": "eval-045",
+    "source": "hand_crafted",
+    "description": "TV stand, oil stain from transit, professional cleaning viable — refurbish",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "fair",
+      "condition_notes": "Navy sectional has a 6-inch oil stain on the right chaise. Frame and structure fully intact. Cushions otherwise unaffected. Professional upholstery cleaning may remove stain.",
+      "marketplace": "wayfair",
+      "order_total_cents": 159900,
+      "inbound_freight_cost_cents": 22400,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 286,
+        "freight_class": "100",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 28000,
+        "open_box_price_estimate_cents": 109900
+      },
+      "customer": {
+        "lifetime_value_cents": 687200,
+        "return_rate": 0.111,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.75,
+    "notes": "Freight covered, oil stain is cosmetic damage. Professional cleaning ($80-120) plus refurb touchup. Refurb_cost($280) + freight($0) = $280 vs open_box($1,099). Clear margin."
+  },
+  {
+    "id": "eval-046",
+    "source": "hand_crafted",
+    "description": "Patio umbrella, buyer remorse, still in factory seal, Overstock — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "new",
+      "condition_notes": "Ordered by mistake, duplicate order. Still in original factory packaging, completely sealed.",
+      "marketplace": "overstock",
+      "order_total_cents": 22900,
+      "inbound_freight_cost_cents": 4200,
+      "sku": {
+        "category": "outdoor",
+        "weight_lbs": 56,
+        "freight_class": "65",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 2500,
+        "open_box_price_estimate_cents": 22900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 1.0,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.83,
+    "notes": "Factory sealed = return to new inventory. 15% restocking fee applies on Overstock for buyer remorse. Clean duplicate-order case."
+  },
+  {
+    "id": "eval-047",
+    "source": "hand_crafted",
+    "description": "Dining table, assembled but rejected by client, Houzz — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Client rejected the design direction. Table assembled by design team but never used by end client. Surfaces spotless, all hardware present. Professional assembly done carefully.",
+      "marketplace": "houzz",
+      "order_total_cents": 119900,
+      "inbound_freight_cost_cents": 24200,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 196,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 12000,
+        "open_box_price_estimate_cents": 84900
+      },
+      "customer": {
+        "lifetime_value_cents": 3187400,
+        "return_rate": 0.065,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 200000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.83,
+    "notes": "Like-new, ultra-high-LTV design client. Houzz 10% restocking fee waived for designer tier. Refund in full, relist as open box."
+  },
+  {
+    "id": "eval-048",
+    "source": "hand_crafted",
+    "description": "Workbench, industrial, buyer remorse, never opened — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "new",
+      "condition_notes": "Ordered wrong size — needed 72 inch, received 60 inch. Still factory-sealed in original crating.",
+      "marketplace": "amazon_fbm",
+      "order_total_cents": 94900,
+      "inbound_freight_cost_cents": 22400,
+      "sku": {
+        "category": "industrial",
+        "weight_lbs": 242,
+        "freight_class": "100",
+        "refurb_difficulty": "not_refurbishable",
+        "refurb_cost_estimate_cents": 0,
+        "open_box_price_estimate_cents": 64900
+      },
+      "customer": {
+        "lifetime_value_cents": 437300,
+        "return_rate": 0.2,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 100000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.86,
+    "notes": "Factory sealed, not refurbishable category. Return to new inventory. Standard process."
+  },
+  {
+    "id": "eval-049",
+    "source": "hand_crafted",
+    "description": "Spin bike, flywheel wobble, buyer claims defect but really cosmetic — escalate (conflicting signals)",
+    "return_snapshot": {
+      "return_reason": "defective",
+      "condition": "fair",
+      "condition_notes": "Flywheel shows slight wobble at highest resistance. Customer claims defect but tech report notes wobble is within manufacturer spec tolerance. Used for 4 months. Other components fully functional.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 129900,
+      "inbound_freight_cost_cents": 18400,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 112,
+        "freight_class": "85",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 18000,
+        "open_box_price_estimate_cents": 89900
+      },
+      "customer": {
+        "lifetime_value_cents": 229900,
+        "return_rate": 0.4,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.73,
+    "notes": "Conflicting signals: customer claims defect, tech says within spec. 4 months of use. High return rate customer (40%). Needs human review to adjudicate whether defect is real or policy exploit."
+  },
+  {
+    "id": "eval-050",
+    "source": "hand_crafted",
+    "description": "Refrigerator, like-new, 2 months, direct channel buyer remorse — refurbish",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "like_new",
+      "condition_notes": "Renovating kitchen, switching to built-in refrigerator. Freestanding unit in perfect condition — 2 months old, no cosmetic issues. Original packaging partially available.",
+      "marketplace": "shopify",
+      "order_total_cents": 239900,
+      "inbound_freight_cost_cents": 52000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 332,
+        "freight_class": "110",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 48000,
+        "open_box_price_estimate_cents": 169900
+      },
+      "customer": {
+        "lifetime_value_cents": 2184000,
+        "return_rate": 0.158,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.76,
+    "notes": "Like-new appliance, freight covered, high-LTV direct customer. Refurb_cost($480) + freight($0) = $480 vs open_box($1,699). Strong margin. Hard refurb difficulty but cosmetically perfect — minimal work needed."
+  },
+  {
+    "id": "eval-051",
+    "source": "hand_crafted",
+    "description": "Accent chair, velvet fabric tear from transit — refurbish",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "fair",
+      "condition_notes": "Right armrest fabric torn on the underside, approximately 3 inches. Transit damage noted on carrier BOL. Frame and cushions otherwise excellent.",
+      "marketplace": "shopify",
+      "order_total_cents": 159900,
+      "inbound_freight_cost_cents": 22600,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 64,
+        "freight_class": "70",
+        "refurb_difficulty": "moderate",
+        "refurb_cost_estimate_cents": 11000,
+        "open_box_price_estimate_cents": 54900
+      },
+      "customer": {
+        "lifetime_value_cents": 578400,
+        "return_rate": 0.143,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 300000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.80,
+    "notes": "Freight covered, upholstery reattachment is moderate difficulty. Refurb_cost($110) + freight($0) = $110 vs open_box($549). Strong margin."
+  },
+  {
+    "id": "eval-052",
+    "source": "hand_crafted",
+    "description": "Washer-dryer combo, buyer remorse, good condition, fraud-flagged customer — escalate",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Moving to smaller apartment. Unit works perfectly, used 4 months. Customer return rate 60%, this is their 3rd return in 8 months, all on high-ticket appliances.",
+      "marketplace": "amazon_fba",
+      "order_total_cents": 129900,
+      "inbound_freight_cost_cents": 32000,
+      "sku": {
+        "category": "appliance",
+        "weight_lbs": 196,
+        "freight_class": "100",
+        "refurb_difficulty": "hard",
+        "refurb_cost_estimate_cents": 42000,
+        "open_box_price_estimate_cents": 89900
+      },
+      "customer": {
+        "lifetime_value_cents": 312400,
+        "return_rate": 0.6,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "escalate",
+    "expected_confidence_floor": 0.78,
+    "notes": "Fraud-flagged customer with pattern of high-ticket appliance returns. Within Amazon's strict fraud detection threshold. Escalate for manual review of return pattern."
+  },
+  {
+    "id": "eval-053",
+    "source": "hand_crafted",
+    "description": "Platform bed, buyer remorse, used 2 months, good condition — refund",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "good",
+      "condition_notes": "Changing the bedroom aesthetic. Bed used for 2 months. Frame structurally sound, slats intact, finish has very minor scuff on one corner. No damage.",
+      "marketplace": "wayfair",
+      "order_total_cents": 74900,
+      "inbound_freight_cost_cents": 13800,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 122,
+        "freight_class": "85",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 8000,
+        "open_box_price_estimate_cents": 52900
+      },
+      "customer": {
+        "lifetime_value_cents": 698200,
+        "return_rate": 0.25,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refund",
+    "expected_confidence_floor": 0.78,
+    "notes": "Within 30-day window, good condition, below auto-decide ceiling. Refund + relist as open box. Minor scuff does not warrant escalation."
+  },
+  {
+    "id": "eval-054",
+    "source": "hand_crafted",
+    "description": "Bookcase, transit damage — minor back panel crack — refurbish",
+    "return_snapshot": {
+      "return_reason": "damage_in_transit",
+      "condition": "fair",
+      "condition_notes": "Back panel has a 4-inch crack in the MDF. Box showed corner damage. Structural shelves and side panels fully intact. Cosmetic back panel replacement is straightforward.",
+      "marketplace": "wayfair",
+      "order_total_cents": 44900,
+      "inbound_freight_cost_cents": 8200,
+      "sku": {
+        "category": "furniture",
+        "weight_lbs": 86,
+        "freight_class": "70",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 4500,
+        "open_box_price_estimate_cents": 29900
+      },
+      "customer": {
+        "lifetime_value_cents": 319800,
+        "return_rate": 0.2,
+        "fraud_flag": false
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 1.0,
+        "auto_decide_ceiling_cents": 150000
+      }
+    },
+    "expected_disposition": "refurbish",
+    "expected_confidence_floor": 0.82,
+    "notes": "Freight covered, easy refurb. Back panel replacement is a $20-30 MDF cut. Refurb_cost($45) + freight($0) = $45 vs open_box($299). Excellent margin."
+  },
+  {
+    "id": "eval-055",
+    "source": "hand_crafted",
+    "description": "Adjustable dumbbell set, buyer remorse, used extensively — dispose",
+    "return_snapshot": {
+      "return_reason": "buyer_remorse",
+      "condition": "poor",
+      "condition_notes": "Used for about 8 months. Weight adjustment mechanism jammed on the 25lb setting — cannot switch weights. Rubber coating on handles cracking. Grip plates showing significant wear marks.",
+      "marketplace": "overstock",
+      "order_total_cents": 59900,
+      "inbound_freight_cost_cents": 10200,
+      "sku": {
+        "category": "fitness",
+        "weight_lbs": 108,
+        "freight_class": "65",
+        "refurb_difficulty": "easy",
+        "refurb_cost_estimate_cents": 4000,
+        "open_box_price_estimate_cents": 52900
+      },
+      "customer": {
+        "lifetime_value_cents": 112400,
+        "return_rate": 0.667,
+        "fraud_flag": true
+      },
+      "policy": {
+        "return_window_days": 30,
+        "freight_subsidy_pct": 0.0,
+        "auto_decide_ceiling_cents": 80000
+      }
+    },
+    "expected_disposition": "dispose",
+    "expected_confidence_floor": 0.73,
+    "notes": "Adjustment mechanism jammed = core product function broken. Refurb on fitness equipment mechanisms is high risk for resale. Inbound($102) + refurb($40) = $142 vs Overstock open_box clearance discounted value (~$370). Fraud customer + poor condition = dispose."
+  }
+]
